@@ -102,6 +102,7 @@ AlertDialog telaParaAdicionarPessoas2(BuildContext context){
             TextoPersonalizado('Agora foi'),
             TextoPersonalizado('Agora foi'),
             TextoPersonalizado('Agora foi'),
+            
             TextoPersonalizado('Agora foi'),
 
 
