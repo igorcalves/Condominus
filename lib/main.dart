@@ -43,10 +43,6 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Cores.corDoAppBar(),
-          title: const TextoPersonalizado('Moradores',tamanho: 34.0),
-        ),
         body: Container(
           decoration: Cores.gradientePrincipal(),
           child: Container(
@@ -54,7 +50,10 @@ class AppWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 24.0),
           child: Column(
+            
             children: [
+          SizedBox(height: 84,),
+
               const TextoBuscarUsuario(),
               const SizedBox(height: 25),
               Expanded(

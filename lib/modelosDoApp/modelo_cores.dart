@@ -6,13 +6,13 @@ class Cores {
   }
 
   static Color corDoAppBar() {
-    return const Color(0xff3fedfb);
+    return Color.fromARGB(255, 38, 109, 202);
   }
 
   static BoxDecoration gradientePrincipal(){
   return const BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xff41dcfb), Color(0xff45edd9), Color(0xff3fedfb)],
+          colors: [Color.fromARGB(255, 5, 134, 160), Color.fromARGB(255, 38, 109, 202), Color.fromARGB(255, 9, 126, 134)],
           stops: [0.12, 0.25, 1],
           begin: Alignment.bottomRight,
           end: Alignment.topLeft,

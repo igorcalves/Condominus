@@ -39,8 +39,12 @@ class TextoBuscarUsuario extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconeDeAdicionar(onPressed: (){
-                              
-                        
+                              showDialog(
+                                context: context,
+                                builder: (_) {
+                                  return telaParaAdicionarPessoas2(context);
+                                }
+                              );
                             }),
                             IconePequisa(onPressed: (){},)
                             
@@ -50,4 +54,72 @@ class TextoBuscarUsuario extends StatelessWidget {
                         hintStyle: TextStyle(color: Cores.corDoTextoPrincipal())),
                   );
   }
+}
+
+
+AlertDialog telaParaAdicionarPessoas(){
+  return AlertDialog(
+    title: const TextoPersonalizado('Cadastro de Morador'),
+    insetPadding: EdgeInsets.all(2),
+    content: Column(children: [
+      TextoPersonalizado('iiii'),
+      TextoPersonalizado('iiii'),
+      TextoPersonalizado('iiii'),
+
+
+    ],),
+    actions: [
+      Row(children: [
+        Spacer(),
+        TextButton(onPressed: (){}, child: TextoPersonalizado('Registrar')),
+        TextButton(onPressed: (){}, child: TextoPersonalizado('Cancelar'))
+
+      ],)
+    ],
+
+
+  );
+}
+
+
+
+AlertDialog telaParaAdicionarPessoas2(BuildContext context){
+  return AlertDialog(
+    title: const TextoPersonalizado('Cadastro de Morador'),
+  backgroundColor: const Color.fromARGB(121, 11, 67, 172).withOpacity(0.8),
+  shape: const RoundedRectangleBorder(
+    borderRadius:
+      BorderRadius.all(
+        Radius.circular(30.0))),
+    content: Builder(
+      builder: (context) {
+        var height = MediaQuery.of(context).size.height;
+        var width = MediaQuery.of(context).size.width;
+        return SizedBox(
+          height: height - 500,
+          width: width - 400,
+          child: const Column(children: [
+            TextoPersonalizado('Agora foi'),
+            TextoPersonalizado('Agora foi'),
+            TextoPersonalizado('Agora foi'),
+            TextoPersonalizado('Agora foi'),
+
+
+          ],),
+        );
+      },
+      
+    ),
+    actions: [
+      Row(children: [
+        Spacer(),
+        TextButton(onPressed: (){}, child: TextoPersonalizado('Registrar')),
+        TextButton(onPressed: (){
+          Navigator.of(context).pop();
+
+        }, child: TextoPersonalizado('Cancelar'))
+
+      ],)
+    ],
+  );
 }

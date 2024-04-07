@@ -3,6 +3,7 @@ import '/buscarMorador/User.dart';
 import '/componentes/icones_prontos.dart';
 import '/modelosDoApp/modelo_texto.dart';
 
+// ignore: must_be_immutable
 class FrameDeDadosPessoa extends StatelessWidget {
 
   List<User> users;
@@ -31,7 +32,7 @@ class FrameDeDadosPessoa extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextoPersonalizado(users[index].name),
-                  TextoPersonalizado(users[index].cpf)
+                  TextoPersonalizado(users[index].cpf,tamanho: 14,)
                 ],
               ),
             ],
