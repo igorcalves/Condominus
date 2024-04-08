@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:telas/componentes/icones_prontos.dart';
-import 'package:telas/modelosDoApp/modelo_cores.dart';
-import 'package:telas/modelosDoApp/modelo_texto.dart';
-import 'package:telas/pages/sub_tela_criar_pessoa.dart';
+import 'package:Condominus/componentes/icones_prontos.dart';
+import 'package:Condominus/modelosDoApp/modelo_cores.dart';
+import 'package:Condominus/modelosDoApp/modelo_texto.dart';
+import 'package:Condominus/pages/sub_tela_criar_pessoa.dart';
 
 TextField campoDeBusca(BuildContext context){
 

@@ -1,10 +1,10 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:telas/componentes/frame_usuario.dart';
-import 'package:telas/componentes/icones_prontos.dart';
-import 'package:telas/modelosDoApp/modelo_cores.dart';
-import 'package:telas/modelosDoApp/modelo_texto.dart';
+import 'package:Condominus/componentes/frame_usuario.dart';
+import 'package:Condominus/componentes/icones_prontos.dart';
+import 'package:Condominus/modelosDoApp/modelo_cores.dart';
+import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import '/buscarMorador/User.dart';
 
 

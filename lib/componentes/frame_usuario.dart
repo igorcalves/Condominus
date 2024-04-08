@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:telas/pages/sub_tela_criar_pessoa.dart';
-import 'package:telas/pages/tela_exibir_usuario.dart';
+import 'package:Condominus/pages/sub_tela_criar_pessoa.dart';
+import 'package:Condominus/pages/tela_exibir_usuario.dart';
 import '/buscarMorador/User.dart';
 import '/componentes/icones_prontos.dart';
 import '/modelosDoApp/modelo_texto.dart';

@@ -1,9 +1,9 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:telas/buscarMorador/User.dart';
-import 'package:telas/modelosDoApp/modelo_cores.dart';
-import 'package:telas/modelosDoApp/modelo_texto.dart';
+import 'package:Condominus/buscarMorador/User.dart';
+import 'package:Condominus/modelosDoApp/modelo_cores.dart';
+import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 
 AlertDialog telaDeDadosUsuario(User user){
   return AlertDialog(

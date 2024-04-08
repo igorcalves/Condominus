@@ -1,9 +1,9 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:telas/componentes/campo_texto.dart';
+import 'package:Condominus/componentes/campo_texto.dart';
 
-import 'package:telas/modelosDoApp/modelo_cores.dart';
+import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 
 
 class TextoPersonalizado extends StatelessWidget {
