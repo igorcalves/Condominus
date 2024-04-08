@@ -17,22 +17,6 @@ void main() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class AppWidget extends StatelessWidget {
   AppWidget(this.users, {super.key});
 
@@ -52,9 +36,9 @@ class AppWidget extends StatelessWidget {
           child: Column(
             
             children: [
-          SizedBox(height: 84,),
+          const SizedBox(height: 84,),
 
-              const TextoBuscarUsuario(),
+               TextoBuscarUsuario(),
               const SizedBox(height: 25),
               Expanded(
                 child: listarOsUsuariosNaTela(users)
@@ -84,7 +68,7 @@ ListView listarOsUsuariosNaTela(List<User> users){
                       itemCount: users.length,
                       itemBuilder: (context, index) {
                         return ListTile(
-                          title: FrameDeDadosPessoa(users:pegarUsuarios(),index:index),
+                          title: FrameDeDadosPessoa(pegarUsuarios()[index]),
                         );
                       },
                     );

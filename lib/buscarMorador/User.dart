@@ -8,6 +8,6 @@ class User {
 
   @override
   String toString() {
-    return 'nome: $name cpf: $cpf idade: $idade';
+    return 'nome: $name \ncpf: $cpf \nidade: $idade';
   }
 }

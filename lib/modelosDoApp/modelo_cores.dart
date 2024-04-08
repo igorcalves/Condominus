@@ -6,9 +6,12 @@ class Cores {
   }
 
   static Color corDoAppBar() {
-    return Color.fromARGB(255, 38, 109, 202);
+    return const Color.fromARGB(255, 38, 109, 202);
   }
 
+  static Color corDoAlertDialog({double opacidade = 0.8}) {
+    return const Color.fromARGB(121, 11, 67, 172).withOpacity(opacidade);
+  }
   static BoxDecoration gradientePrincipal(){
   return const BoxDecoration(
         gradient: LinearGradient(

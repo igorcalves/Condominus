@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:telas/pages/sub_tela_criar_pessoa.dart';
+import 'package:telas/pages/tela_exibir_usuario.dart';
 import '/buscarMorador/User.dart';
 import '/componentes/icones_prontos.dart';
 import '/modelosDoApp/modelo_texto.dart';
@@ -6,10 +8,9 @@ import '/modelosDoApp/modelo_texto.dart';
 // ignore: must_be_immutable
 class FrameDeDadosPessoa extends StatelessWidget {
 
-  List<User> users;
- int index;
- 
- FrameDeDadosPessoa({ required this.users, required this.index, super.key});
+  User user;
+
+FrameDeDadosPessoa(this.user, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,12 @@ class FrameDeDadosPessoa extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            print(users[index]);
+            showDialog(
+                    context: context,
+                    builder: (_) {
+                      return telaDeDadosUsuario(user);
+                    },
+                  );
           },
           child: Row(
             children: [
@@ -31,16 +37,28 @@ class FrameDeDadosPessoa extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextoPersonalizado(users[index].name),
-                  TextoPersonalizado(users[index].cpf,tamanho: 14,)
+                  TextoPersonalizado(user.name),
+                  TextoPersonalizado(user.cpf,tamanho: 14,)
                 ],
               ),
             ],
           ),
         ),
         const Spacer(),
-        IconeEditar(onPressed: (){}),
-        IconeDeletar(onPressed: (){print(users[index]);}),
+        IconeEditar(onPressed: (){
+          showDialog(
+                    context: context,
+                    builder: (_) {
+                      return telaParaAdicionarPessoas(context,'Atualizar Cadastro',user: user);
+                    },
+                  );
+
+        }),
+        IconeDeletar(onPressed: (){
+            
+
+
+        }),
       ],
     );
 
