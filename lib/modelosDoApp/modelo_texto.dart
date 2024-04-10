@@ -17,7 +17,8 @@ class TextoPersonalizado extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       _texto,
-      
+      overflow: TextOverflow.ellipsis,
+      maxLines: 1,
       style: TextStyle(color: Cores.corDoTextoPrincipal().withOpacity(opacidade),fontSize: tamanho ),
     );
 }
@@ -27,7 +28,9 @@ class TextoPersonalizado extends StatelessWidget {
 
 class TextoBuscarUsuario extends StatelessWidget {
 
-  TextEditingController _textFieldController = TextEditingController();
+  final TextEditingController _textFieldController = TextEditingController();
+
+  TextoBuscarUsuario({super.key});
 
   @override
   Widget build(BuildContext context) {

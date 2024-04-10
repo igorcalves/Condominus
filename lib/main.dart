@@ -1,107 +1,286 @@
-
-
+import 'package:Condominus/pages/usuarios/tela_princial_gerenciar_usuarios.dart';
 import 'package:flutter/material.dart';
 import 'package:Condominus/componentes/frame_usuario.dart';
-import 'package:Condominus/componentes/icones_prontos.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
-import '/buscarMorador/User.dart';
-
+import 'dominio/user.dart';
 
 void main() {
   //runApp(AppWidget(pegarUsuarios()));
   runApp(AppWidget(pegarUsuarios()));
 }
 
-
-
-
-
-class AppWidget extends StatelessWidget {
-  AppWidget(this.users, {super.key});
-
-  List<User> users;
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Container(
-          decoration: Cores.gradientePrincipal(),
-          child: Container(
-        decoration: Cores.gradientePrincipal(),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24.0),
-          child: Column(
-            
-            children: [
-          const SizedBox(height: 84,),
-
-               TextoBuscarUsuario(),
-              const SizedBox(height: 25),
-              Expanded(
-                child: listarOsUsuariosNaTela(users)
-              ),
-            ],
-          ),
-        ),
-          ),
-        )
-      ),
-    );
-  }
-}
-
-
-
-
-
-
-
-
-
-
-ListView listarOsUsuariosNaTela(List<User> users){
-
-  return ListView.builder(
-                      itemCount: users.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: FrameDeDadosPessoa(pegarUsuarios()[index]),
-                        );
-                      },
-                    );
-
-}
-
-
-List<User> pegarUsuarios(){
-   return  [
-    User('Arquimonde', '1489', 25),
-    User('Illidan Stormrage', '8976', 70),
-    User('Kel Thuzad', '4929', 33),
-    User('Lady Vashj', '5716', 100),
-    User('Nefarian', '6059', 33),
-    User('Onyxia', '9753', 36),
-    User('Ragnaros', '6795', 62),
-    User('The Lich King', '2170', 59),
-    User('Yogg-Saron', '3691', 42),
-    User('CThun', '5541', 23),
-    User('Deathwing', '1110', 56),
-    User('Garrosh Hellscream', '4829', 52),
-    User('Guldan', '5758', 22),
-    User('Kaelthas Sunstrider', '6045', 56),
-    User('Kiljaeden', '1692', 93),
-    User('Mannoroth', '7775', 31),
-    User('Sargeras', '5329', 39),
-    User('Sylvanas Windrunner', '7926', 65),
-    User('Thrall', '7426', 78),
-    User('Varian Wrynn', '9062', 39),
-    User('Grommash Hellscream', '8831', 33),
-    User('Malfurion Stormrage', '6799', 56),
-    User('Tyrande Whisperwind', '3305', 24),
-    User('Voljin', '7506', 87),
-    User('Jaina Proudmoore', '5561', 45)
+List<User> pegarUsuarios() {
+  return [
+    User(
+        name: "Kil'jaeden Lança Trovão",
+        cpf: "484.333.371-20",
+        phone: "41 7284 7797",
+        role: "USER",
+        email: "Kil'jaeden@Condominus.com",
+        birthDay: "1988-09-08",
+        condominiumPrice: 3022.74,
+        apartmentNumber: "D0"),
+    User(
+        name: "Anduin Trama Sombria",
+        cpf: "474.626.452-15",
+        phone: "+55 51 2619 5353",
+        role: "USER",
+        email: "Anduin@Condominus.com",
+        birthDay: "1984-11-07",
+        condominiumPrice: 1911.34,
+        apartmentNumber: "D1"),
+    User(
+        name: "Ragnaros Guerreiro",
+        cpf: "653.265.686-08",
+        phone: "(081) 6826-7793",
+        role: "USER",
+        email: "Ragnaros@Condominus.com",
+        birthDay: "1993-06-06",
+        condominiumPrice: 3685.22,
+        apartmentNumber: "D2"),
+    User(
+        name: "Kel'Thuzad Lâmina Lunar",
+        cpf: "736.027.896-06",
+        phone: "21 3919 1729",
+        role: "USER",
+        email: "Kel'Thuzad@Condominus.com",
+        birthDay: "1978-09-01",
+        condominiumPrice: 1685.29,
+        apartmentNumber: "D3"),
+    User(
+        name: "Bloodelf Alvorada",
+        cpf: "644.216.631-44",
+        phone: "(031) 6415 2899",
+        role: "USER",
+        email: "Bloodelf@Condominus.com",
+        birthDay: "1982-12-18",
+        condominiumPrice: 2057.32,
+        apartmentNumber: "D4"),
+    User(
+        name: "Tichondrius Raio de Esperança",
+        cpf: "436.330.480-79",
+        phone: "+55 31 3037 2364",
+        role: "USER",
+        email: "Tichondrius@Condominus.com",
+        birthDay: "1984-03-17",
+        condominiumPrice: 2105.61,
+        apartmentNumber: "D5"),
+    User(
+        name: "Nazgrim Chama Ardente",
+        cpf: "421.781.131-71",
+        phone: "+55 81 4288 3682",
+        role: "USER",
+        email: "Nazgrim@Condominus.com",
+        birthDay: "1977-02-18",
+        condominiumPrice: 2550.02,
+        apartmentNumber: "D6"),
+    User(
+        name: "Human Temível",
+        cpf: "815.512.237-21",
+        phone: "61 2758-8636",
+        role: "USER",
+        email: "Human@Condominus.com",
+        birthDay: "1992-06-26",
+        condominiumPrice: 1065.11,
+        apartmentNumber: "D7"),
+    User(
+        name: "Malfurion Coração Valente",
+        cpf: "480.551.272-65",
+        phone: "(081) 7668 4433",
+        role: "USER",
+        email: "Malfurion@Condominus.com",
+        birthDay: "1982-12-04",
+        condominiumPrice: 3864.14,
+        apartmentNumber: "D8"),
+    User(
+        name: "Garrosh Tempestade",
+        cpf: "463.430.996-88",
+        phone: "+55 71 8922 7133",
+        role: "USER",
+        email: "Garrosh@Condominus.com",
+        birthDay: "1989-01-13",
+        condominiumPrice: 1814.42,
+        apartmentNumber: "D9"),
+    User(
+        name: "Mal'Ganis Manto de Gelo",
+        cpf: "750.057.902-09",
+        phone: "(071) 3310-2838",
+        role: "USER",
+        email: "Mal'Ganis@Condominus.com",
+        birthDay: "1989-08-30",
+        condominiumPrice: 2620.6,
+        apartmentNumber: "D10"),
+    User(
+        name: "Nathanos Traidor",
+        cpf: "363.875.630-03",
+        phone: "(011) 2274 7431",
+        role: "USER",
+        email: "Nathanos@Condominus.com",
+        birthDay: "1994-03-03",
+        condominiumPrice: 2750.63,
+        apartmentNumber: "D11"),
+    User(
+        name: "Worgen Nobre Coração",
+        cpf: "671.422.644-52",
+        phone: "+55 (071) 5271-9824",
+        role: "USER",
+        email: "Worgen@Condominus.com",
+        birthDay: "1987-11-11",
+        condominiumPrice: 2348.84,
+        apartmentNumber: "D12"),
+    User(
+        name: "Ysera Voz dos Ancestrais",
+        cpf: "059.981.208-46",
+        phone: "(021) 1919 7700",
+        role: "USER",
+        email: "Ysera@Condominus.com",
+        birthDay: "1977-07-21",
+        condominiumPrice: 3869.2,
+        apartmentNumber: "D13"),
+    User(
+        name: "Yogg-Saron Corre-céus",
+        cpf: "816.582.980-41",
+        phone: "+55 (041) 0805-3843",
+        role: "USER",
+        email: "Yogg-Saron@Condominus.com",
+        birthDay: "1975-06-30",
+        condominiumPrice: 2421.02,
+        apartmentNumber: "D14"),
+    User(
+        name: "Wrathion Céu Noturno",
+        cpf: "619.114.041-17",
+        phone: "81 5269-7325",
+        role: "USER",
+        email: "Wrathion@Condominus.com",
+        birthDay: "1976-05-14",
+        condominiumPrice: 2559.25,
+        apartmentNumber: "D15"),
+    User(
+        name: "Bolvar Vaga-Lumes",
+        cpf: "207.917.361-30",
+        phone: "+55 21 0280-4009",
+        role: "USER",
+        email: "Bolvar@Condominus.com",
+        birthDay: "1980-02-08",
+        condominiumPrice: 2860.6,
+        apartmentNumber: "D16"),
+    User(
+        name: "Zul'jin Flecha Negra",
+        cpf: "646.774.868-21",
+        phone: "+55 41 7012-0705",
+        role: "USER",
+        email: "Zul'jin@Condominus.com",
+        birthDay: "1974-12-24",
+        condominiumPrice: 2121.51,
+        apartmentNumber: "D17"),
+    User(
+        name: "Khadgar Força da Montanha",
+        cpf: "832.937.397-60",
+        phone: "(071) 3570-5524",
+        role: "USER",
+        email: "Khadgar@Condominus.com",
+        birthDay: "1977-06-09",
+        condominiumPrice: 1668.4,
+        apartmentNumber: "D18"),
+    User(
+        name: "Jaina Martelo",
+        cpf: "153.406.536-22",
+        phone: "+55 41 1742 8406",
+        role: "USER",
+        email: "Jaina@Condominus.com",
+        birthDay: "1973-10-28",
+        condominiumPrice: 2629.77,
+        apartmentNumber: "D19"),
+    User(
+        name: "Onyxia Lobo Solitário",
+        cpf: "366.187.933-97",
+        phone: "+55 11 6968-2698",
+        role: "USER",
+        email: "Onyxia@Condominus.com",
+        birthDay: "1983-02-15",
+        condominiumPrice: 2248.94,
+        apartmentNumber: "D20"),
+    User(
+        name: "Varian Fenda de Gelo",
+        cpf: "551.817.562-04",
+        phone: "(061) 3768-9904",
+        role: "USER",
+        email: "Varian@Condominus.com",
+        birthDay: "1984-07-03",
+        condominiumPrice: 2095.31,
+        apartmentNumber: "B21"),
+    User(
+        name: "Ner'zhul Forte",
+        cpf: "184.091.406-33",
+        phone: "+55 71 2586 7830",
+        role: "USER",
+        email: "Ner'zhul@Condominus.com",
+        birthDay: "1993-01-12",
+        condominiumPrice: 1683.77,
+        apartmentNumber: "B22"),
+    User(
+        name: "Saurfang Luz do Sol",
+        cpf: "005.934.771-52",
+        phone: "(061) 9347 5548",
+        role: "USER",
+        email: "Saurfang@Condominus.com",
+        birthDay: "1985-05-19",
+        condominiumPrice: 3562.02,
+        apartmentNumber: "B23"),
+    User(
+        name: "Grommash Estrela Cadente",
+        cpf: "206.377.489-42",
+        phone: "0900-846-7206",
+        role: "USER",
+        email: "Grommash@Condominus.com",
+        birthDay: "1988-08-28",
+        condominiumPrice: 1544.4,
+        apartmentNumber: "B24"),
+    User(
+        name: "Arthas Firmeza",
+        cpf: "548.694.544-94",
+        phone: "0800 269 5810",
+        role: "USER",
+        email: "Arthas@Condominus.com",
+        birthDay: "1974-04-29",
+        condominiumPrice: 3547.65,
+        apartmentNumber: "B25"),
+    User(
+        name: "Gallywix Temerário",
+        cpf: "988.393.879-24",
+        phone: "0300-964-5939",
+        role: "USER",
+        email: "Gallywix@Condominus.com",
+        birthDay: "1975-10-12",
+        condominiumPrice: 3816.18,
+        apartmentNumber: "B26"),
+    User(
+        name: "Nefarian Quebra-Ossos",
+        cpf: "419.612.830-00",
+        phone: "+55 71 2990 7488",
+        role: "USER",
+        email: "Nefarian@Condominus.com",
+        birthDay: "1975-03-26",
+        condominiumPrice: 3428.5,
+        apartmentNumber: "B27"),
+    User(
+        name: "Tyrande Fogo Solar",
+        cpf: "003.887.525-17",
+        phone: "+55 84 8328-1109",
+        role: "USER",
+        email: "Tyrande@Condominus.com",
+        birthDay: "1984-10-10",
+        condominiumPrice: 1783.44,
+        apartmentNumber: "B28"),
+    User(
+        name: "Vol'jin Vento Ágil",
+        cpf: "028.430.368-98",
+        phone: "(061) 6730-9368",
+        role: "USER",
+        email: "Vol'jin@Condominus.com",
+        birthDay: "1992-01-09",
+        condominiumPrice: 3525.27,
+        apartmentNumber: "B29"),
   ];
 }
