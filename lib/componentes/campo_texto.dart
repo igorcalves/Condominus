@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:Condominus/componentes/icones_prontos.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
-import 'package:Condominus/pages/sub_tela_criar_pessoa.dart';
+import 'package:Condominus/pages/usuarios/sub_tela_criar_usuario.dart';
 
 TextField campoDeBusca(BuildContext context){
 
