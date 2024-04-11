@@ -1,8 +1,5 @@
 import 'package:Condominus/pages/usuarios/tela_princial_gerenciar_usuarios.dart';
 import 'package:flutter/material.dart';
-import 'package:Condominus/componentes/frame_usuario.dart';
-import 'package:Condominus/modelosDoApp/modelo_cores.dart';
-import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'dominio/user.dart';
 
 void main() {

@@ -1,4 +1,4 @@
-import 'package:Condominus/componentes/frame_usuario.dart';
+import 'package:Condominus/componentes/frame_usuarios.dart';
 import 'package:Condominus/dominio/user.dart';
 import 'package:Condominus/main.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
@@ -42,7 +42,7 @@ ListView listarOsUsuariosNaTela(List<User> users) {
     itemCount: users.length,
     itemBuilder: (context, index) {
       return ListTile(
-        title: FrameDeDadosPessoa(pegarUsuarios()[index]),
+        title: FramePessoa(user: pegarUsuarios()[index]),
       );
     },
   );
