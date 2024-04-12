@@ -44,5 +44,10 @@ class FakeRepository extends ImplementarRepositorio {
   }
 
   @override
-  void criarUsuario(dynamic user) {}
+  void criarUsuario(dynamic user) {
+    user = user as User;
+    deletarUsuario(user.cpf!);
+    var userMap = user.toJson();
+    userList.add(userMap);
+  }
 }

@@ -1,5 +1,3 @@
-import 'package:Condominus/dominio/user.dart';
-
 abstract class ImplementarRepositorio {
   void criarUsuario(dynamic user);
   dynamic bucarPorCpf(String cpf);

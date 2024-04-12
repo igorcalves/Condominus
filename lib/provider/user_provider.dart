@@ -59,5 +59,10 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void criarUsuario(User user) {}
+  void criarUsuario(User user) {
+    _repositorio.criarUsuario(user);
+    users = _repositorio.buscarTodos() as List<User>;
+
+    notifyListeners();
+  }
 }

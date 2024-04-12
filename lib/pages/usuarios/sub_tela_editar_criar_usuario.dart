@@ -78,12 +78,14 @@ AlertDialog telaParaAdicionarPessoas(BuildContext context, String titulo,
                   name: nomeController.text,
                   cpf: cpfController.text,
                   apartmentNumber: numeroDoApartamentoController.text,
-                  birthDay: dataDeNascimentoController.text,
+                  birthDay: DateFormatBR.dateFormatDefault(
+                      dataDeNascimentoController.text),
                   condominiumPrice:
                       double.tryParse(condominiumPriceController.text),
                   email: emailController.text,
                   phone: telefoneController.text,
                   role: roleController.text));
+              Navigator.of(context).pop();
             },
             child: const TextoPersonalizado('Registrar'),
           ),

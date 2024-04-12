@@ -56,6 +56,9 @@ TextField campoDeTextoCadastro(
       labelText: campo,
       labelStyle: estiloDoTexto(),
       hintStyle: estiloDoTexto(),
+      focusedBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
+      ),
     ),
   );
 }

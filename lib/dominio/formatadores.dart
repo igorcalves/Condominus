@@ -6,4 +6,12 @@ class DateFormatBR {
     final DateFormat formatter = DateFormat('dd/MM/yyyy');
     return formatter.format(data);
   }
+
+  static String dateFormatDefault(String dataString) {
+    final DateFormat inputFormatter = DateFormat('dd/MM/yyyy');
+
+    DateTime data = inputFormatter.parse(dataString);
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    return formatter.format(data);
+  }
 }

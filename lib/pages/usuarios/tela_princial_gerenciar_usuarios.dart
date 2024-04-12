@@ -13,6 +13,15 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xff89c5fd),
+            brightness: Brightness.dark,
+          ),
+          textSelectionTheme: TextSelectionThemeData(
+            selectionColor: Colors.white.withOpacity(0.4),
+            selectionHandleColor: Colors.blue,
+          )),
       home: Scaffold(
         appBar: AppBar(
           flexibleSpace: Container(decoration: Cores.gradientePrincipal()),
