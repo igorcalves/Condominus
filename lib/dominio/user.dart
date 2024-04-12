@@ -20,6 +20,19 @@ class User {
       this.condominiumPrice,
       this.apartmentNumber});
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['cpf'] = cpf;
+    data['phone'] = phone;
+    data['role'] = role;
+    data['email'] = email;
+    data['birthDay'] = birthDay;
+    data['condominiumPrice'] = condominiumPrice;
+    data['apartmentNumber'] = apartmentNumber;
+    return data;
+  }
+
   User.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     cpf = json['cpf'];

@@ -1,0 +1,48 @@
+import 'dart:convert';
+import 'dart:ffi';
+
+import 'package:Condominus/dominio/user.dart';
+import 'package:Condominus/repository/fakeDb.dart';
+import 'package:Condominus/repository/interface_repositorio.dart';
+
+class FakeRepository extends ImplementarRepositorio {
+  List<dynamic> userList = jsonDecode(MyRepo.getData());
+
+  @override
+  User? bucarPorCpf(String cpf) {
+    User usuarioFiltrado = userList
+        .map((e) => User.fromJson(e))
+        .firstWhere((user) => user.cpf == cpf, orElse: () => User());
+
+    if (usuarioFiltrado.cpf != null) {
+      return usuarioFiltrado;
+    }
+  }
+
+  @override
+  List<dynamic> buscarPorNome(String name) {
+    List<dynamic> users = [];
+    var usuariosFiltrados = userList
+        .where(
+            (user) => user['name'].toLowerCase().contains(name.toLowerCase()))
+        .toList();
+
+    if (usuariosFiltrados.isNotEmpty) {
+      return usuariosFiltrados;
+    }
+    return users;
+  }
+
+  @override
+  List<User> buscarTodos() {
+    return User.fromJsonList(userList);
+  }
+
+  @override
+  void deletarUsuario(String cpf) {
+    userList.removeWhere((user) => user['cpf'] == cpf);
+  }
+
+  @override
+  void criarUsuario(dynamic user) {}
+}

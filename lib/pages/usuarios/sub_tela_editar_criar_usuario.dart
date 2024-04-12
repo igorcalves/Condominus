@@ -1,10 +1,11 @@
 import 'package:Condominus/dominio/formatadores.dart';
+import 'package:Condominus/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:Condominus/dominio/user.dart';
 import 'package:Condominus/componentes/campo_texto.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
-import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 AlertDialog telaParaAdicionarPessoas(BuildContext context, String titulo,
     {User? user}) {
@@ -27,6 +28,7 @@ AlertDialog telaParaAdicionarPessoas(BuildContext context, String titulo,
     condominiumPriceController.text = user.condominiumPrice.toString();
     numeroDoApartamentoController.text = user.apartmentNumber!;
   }
+  UserProvider userProvider = Provider.of(context);
 
   return AlertDialog(
     title: TextoPersonalizado(titulo),
@@ -72,7 +74,16 @@ AlertDialog telaParaAdicionarPessoas(BuildContext context, String titulo,
           ),
           TextButton(
             onPressed: () {
-              print(nomeController.text);
+              userProvider.criarUsuario(User(
+                  name: nomeController.text,
+                  cpf: cpfController.text,
+                  apartmentNumber: numeroDoApartamentoController.text,
+                  birthDay: dataDeNascimentoController.text,
+                  condominiumPrice:
+                      double.tryParse(condominiumPriceController.text),
+                  email: emailController.text,
+                  phone: telefoneController.text,
+                  role: roleController.text));
             },
             child: const TextoPersonalizado('Registrar'),
           ),

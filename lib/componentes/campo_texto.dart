@@ -1,11 +1,14 @@
+import 'package:Condominus/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:Condominus/componentes/icones_prontos.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/pages/usuarios/sub_tela_editar_criar_usuario.dart';
+import 'package:provider/provider.dart';
 
 TextField campoDeBusca(BuildContext context) {
   final TextEditingController textFieldController = TextEditingController();
 
+  final UserProvider users = Provider.of(context, listen: false);
   return TextField(
     controller: textFieldController,
     style: estiloDoTexto(),
@@ -31,7 +34,7 @@ TextField campoDeBusca(BuildContext context) {
           ),
           IconePequisa(
             onPressed: () {
-              print(textFieldController.text);
+              users.buscarNomeOuCpf(textFieldController.text);
             },
           )
         ],

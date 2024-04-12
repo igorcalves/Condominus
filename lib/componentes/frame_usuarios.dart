@@ -3,7 +3,9 @@ import 'package:Condominus/dominio/user.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'package:Condominus/pages/usuarios/mini_tela_exibir_usuario.dart';
 import 'package:Condominus/pages/usuarios/sub_tela_editar_criar_usuario.dart';
+import 'package:Condominus/provider/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FramePessoa extends StatelessWidget {
   final User user;
@@ -12,13 +14,15 @@ class FramePessoa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider users = Provider.of(context);
+
     return ListTile(
       leading: const CircleAvatar(child: Icon(Icons.person)),
-      title: abrirInfo(
+      title: AbrirInfo(
         user: user,
         text: user.name!,
       ),
-      subtitle: abrirInfo(
+      subtitle: AbrirInfo(
         user: user,
         text: 'Nº apt ${user.apartmentNumber!}',
       ),
@@ -37,7 +41,9 @@ class FramePessoa extends StatelessWidget {
             },
           ),
           IconeDeletar(
-            onPressed: () {},
+            onPressed: () {
+              users.deletarUsuario(user.cpf!);
+            },
           ),
         ],
       ),
@@ -45,8 +51,8 @@ class FramePessoa extends StatelessWidget {
   }
 }
 
-class abrirInfo extends StatelessWidget {
-  const abrirInfo({super.key, required this.user, required this.text});
+class AbrirInfo extends StatelessWidget {
+  const AbrirInfo({super.key, required this.user, required this.text});
 
   final User user;
   final String text;
