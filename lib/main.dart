@@ -15,7 +15,7 @@ void main() {
         FakeRepository(),
       ),
     ),
-  ], child: const TelaPrincipalSindico()));
+  ], child: TelaPrincipalSindico()));
 
   //runApp(AppWidget());
 }

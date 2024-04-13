@@ -17,6 +17,7 @@ dependencies:
   provider:
 
   cupertino_icons: ^1.0.6
+  rolling_bottom_bar: ^0.2.2
 
 dev_dependencies:
   flutter_test:

@@ -37,7 +37,8 @@ class FramePessoa extends StatelessWidget {
                   return Builder(
                     builder: (BuildContext alertDialogContext) {
                       return telaParaAdicionarPessoas(
-                          alertDialogContext, "Atualizar Cadastro");
+                          alertDialogContext, "Atualizar Cadastro",
+                          user: user);
                     },
                   );
                 },
