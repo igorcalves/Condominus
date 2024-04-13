@@ -2,7 +2,7 @@ import 'package:Condominus/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:Condominus/componentes/icones_prontos.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
-import 'package:Condominus/pages/usuarios/sub_tela_editar_criar_usuario.dart';
+import 'package:Condominus/pages/sindico/usuarios/sub_tela_editar_criar_usuario.dart';
 import 'package:provider/provider.dart';
 
 TextField campoDeBusca(BuildContext context) {
@@ -25,9 +25,13 @@ TextField campoDeBusca(BuildContext context) {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (_) {
-                  return telaParaAdicionarPessoas(
-                      context, 'Registro de Usuário');
+                builder: (BuildContext context) {
+                  return Builder(
+                    builder: (BuildContext alertDialogContext) {
+                      return telaParaAdicionarPessoas(
+                          alertDialogContext, "Registro");
+                    },
+                  );
                 },
               );
             },

@@ -23,9 +23,6 @@ class AppWidget extends StatelessWidget {
             selectionHandleColor: Colors.blue,
           )),
       home: Scaffold(
-        appBar: AppBar(
-          flexibleSpace: Container(decoration: Cores.gradientePrincipal()),
-        ),
         body: Container(
           decoration: Cores.gradientePrincipal(),
           child: Container(
