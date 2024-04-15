@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 class UserProvider with ChangeNotifier {
   late List<User> users = [];
 
+  static bool estado = false;
+
   UserProvider(this._repositorio);
 
   final ImplementarRepositorio _repositorio;
@@ -15,7 +17,11 @@ class UserProvider with ChangeNotifier {
 
   void carregarTodos() async {
     var usurariosCarreagos = await _repositorio.carregarTodosUsuarios();
+    await Future.delayed(const Duration(seconds: 1));
+
     users = User.fromJsonList(usurariosCarreagos);
+
+    estado = false;
     notifyListeners();
   }
 
@@ -23,8 +29,11 @@ class UserProvider with ChangeNotifier {
     return users.length;
   }
 
-  void escolherTipoDeBusca(String data) {
+  void escolherTipoDeBusca(String data) async {
     users = [];
+
+    estado = true;
+    notifyListeners();
 
     bool apenasNumeros = true;
     for (int i = 0; i < data.length; i++) {
@@ -46,17 +55,24 @@ class UserProvider with ChangeNotifier {
 
   void _buscarUsuariosPorCpf(String cpf) async {
     var user = await _repositorio.bucarPorCpf(cpf);
+    await Future.delayed(const Duration(seconds: 1));
     if (user is User) {
       users.add(User.fromJson(user));
     } else {
       users = [];
     }
+
+    estado = false;
     notifyListeners();
   }
 
   void _buscarUsuariosPorNome(String nome) async {
     var userD = await _repositorio.buscarPorNome(nome);
+    await Future.delayed(const Duration(seconds: 1));
+
     users = User.fromJsonList(userD);
+    notifyListeners();
+    estado = false;
     notifyListeners();
   }
 
@@ -69,7 +85,9 @@ class UserProvider with ChangeNotifier {
   void criarUsuario(User user) {
     _repositorio.criarUsuario(user);
     users = _repositorio.buscarTodos() as List<User>;
+  }
 
+  isLoading(bool estado) {
     notifyListeners();
   }
 }

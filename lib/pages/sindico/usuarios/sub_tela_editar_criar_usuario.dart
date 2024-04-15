@@ -2,7 +2,7 @@ import 'package:Condominus/dominio/formatadores.dart';
 import 'package:Condominus/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:Condominus/dominio/user.dart';
-import 'package:Condominus/componentes/campo_texto.dart';
+import 'package:Condominus/componentes/campo_superior_busca.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'package:provider/provider.dart';
