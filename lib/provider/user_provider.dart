@@ -1,5 +1,5 @@
 import 'package:Condominus/dominio/user.dart';
-import 'package:Condominus/repository/interface_repositorio.dart';
+import 'package:Condominus/repository/interfaceContrato.dart';
 import 'package:flutter/material.dart';
 
 class UserProvider with ChangeNotifier {
@@ -9,15 +9,21 @@ class UserProvider with ChangeNotifier {
 
   final ImplementarRepositorio _repositorio;
 
-  List<User> buscarTodos() {
-    return [...users];
+  List<User>? buscarTodos() {
+    return [...users].isNotEmpty ? [...users] : null;
+  }
+
+  void carregarTodos() async {
+    var usurariosCarreagos = await _repositorio.carregarTodosUsuarios();
+    users = User.fromJsonList(usurariosCarreagos);
+    notifyListeners();
   }
 
   int tamanhoDaLista() {
     return users.length;
   }
 
-  void buscarNomeOuCpf(String data) {
+  void escolherTipoDeBusca(String data) {
     users = [];
 
     bool apenasNumeros = true;
@@ -34,23 +40,24 @@ class UserProvider with ChangeNotifier {
         _buscarUsuariosPorNome(data);
       }
     } else {
-      users = _repositorio.buscarTodos() as List<User>;
+      carregarTodos();
     }
-
-    notifyListeners();
   }
 
-  void _buscarUsuariosPorCpf(String cpf) {
-    if (_repositorio.bucarPorCpf(cpf) != null) {
-      users.add(_repositorio.bucarPorCpf(cpf)!);
+  void _buscarUsuariosPorCpf(String cpf) async {
+    var user = await _repositorio.bucarPorCpf(cpf);
+    if (user is User) {
+      users.add(User.fromJson(user));
     } else {
       users = [];
     }
+    notifyListeners();
   }
 
-  void _buscarUsuariosPorNome(String nome) {
-    var userD = _repositorio.buscarPorNome(nome);
+  void _buscarUsuariosPorNome(String nome) async {
+    var userD = await _repositorio.buscarPorNome(nome);
     users = User.fromJsonList(userD);
+    notifyListeners();
   }
 
   void deletarUsuario(String cpf) {

@@ -6,8 +6,22 @@ import 'package:Condominus/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AppWidget extends StatelessWidget {
+class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
+
+  @override
+  State<AppWidget> createState() => _AppWidgetState();
+}
+
+class _AppWidgetState extends State<AppWidget> {
+  var users;
+
+  controlarEstado({Function Function()? buscarUsarios}) async {
+    () => buscarUsarios!();
+    print('ta indo');
+  }
+
+  bool carregamento = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +45,17 @@ class AppWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 4.0),
               child: Column(
                 children: [
-                  const TextoBuscarUsuario(),
-                  Expanded(
-                    child: listarOsUsuariosNaTela(context),
+                  TextoBuscarUsuario(
+                    controlarEstado: () => controlarEstado(),
                   ),
+                  carregamento
+                      ? const Expanded(
+                          child: Center(
+                          child: CircularProgressIndicator(),
+                        ))
+                      : Expanded(
+                          child: listarOsUsuariosNaTela(context, users),
+                        ),
                 ],
               ),
             ),
@@ -45,15 +66,22 @@ class AppWidget extends StatelessWidget {
   }
 }
 
-ListView listarOsUsuariosNaTela(BuildContext context) {
-  UserProvider userProvide = Provider.of(context);
-  List<User> users = userProvide.buscarTodos();
-  return ListView.builder(
-    itemCount: userProvide.tamanhoDaLista(),
-    itemBuilder: (context, index) {
-      return ListTile(
-        title: FramePessoa(user: users[index]),
-      );
-    },
-  );
+Widget listarOsUsuariosNaTela(BuildContext context, var users) {
+  return users != null
+      ? ListView.builder(
+          itemCount: users.lengt,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: FramePessoa(user: users[index]),
+            );
+          },
+        )
+      : const Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Text('Nenhum Usuario Encontrado!'),
+          ],
+        );
 }

@@ -5,7 +5,7 @@ import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/pages/sindico/usuarios/sub_tela_editar_criar_usuario.dart';
 import 'package:provider/provider.dart';
 
-TextField campoDeBusca(BuildContext context) {
+TextField campoDeBusca(BuildContext context, Function controlarEstado) {
   final TextEditingController textFieldController = TextEditingController();
 
   final UserProvider users = Provider.of(context, listen: false);
@@ -38,7 +38,8 @@ TextField campoDeBusca(BuildContext context) {
           ),
           IconePequisa(
             onPressed: () {
-              users.buscarNomeOuCpf(textFieldController.text);
+              controlarEstado();
+              users.escolherTipoDeBusca(textFieldController.text);
             },
           )
         ],

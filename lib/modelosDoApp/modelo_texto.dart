@@ -25,7 +25,9 @@ class TextoPersonalizado extends StatelessWidget {
 }
 
 class TextoBuscarUsuario extends StatelessWidget {
-  const TextoBuscarUsuario({super.key});
+  final void Function() controlarEstado;
+
+  const TextoBuscarUsuario({super.key, required this.controlarEstado});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,6 @@ class TextoBuscarUsuario extends StatelessWidget {
             width: 1.0,
           ),
         ),
-        child: campoDeBusca(context));
+        child: campoDeBusca(context, controlarEstado));
   }
 }

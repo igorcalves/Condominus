@@ -1,5 +1,6 @@
+
+/*
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:Condominus/dominio/user.dart';
 import 'package:Condominus/repository/fakeDb.dart';
@@ -17,6 +18,7 @@ class FakeRepository extends ImplementarRepositorio {
     if (usuarioFiltrado.cpf != null) {
       return usuarioFiltrado;
     }
+    return usuarioFiltrado;
   }
 
   @override
@@ -51,3 +53,4 @@ class FakeRepository extends ImplementarRepositorio {
     userList.add(userMap);
   }
 }
+*/
