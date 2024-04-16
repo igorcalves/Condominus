@@ -56,7 +56,7 @@ class UserProvider with ChangeNotifier {
   void _buscarUsuariosPorCpf(String cpf) async {
     var user = await _repositorio.bucarPorCpf(cpf);
     await Future.delayed(const Duration(seconds: 1));
-    if (user is User) {
+    if (user is Map<String, dynamic>) {
       users.add(User.fromJson(user));
     } else {
       users = [];

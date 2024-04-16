@@ -26,16 +26,13 @@ class AppWidget extends StatelessWidget {
       home: Scaffold(
         body: Container(
           decoration: Cores.gradientePrincipal(),
-          child: Container(
-            decoration: Cores.gradientePrincipal(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4.0),
-              child: Column(
-                children: [
-                  CampoDeBusca(),
-                  const Expanded(child: CorpoDaTelaDeBusca()),
-                ],
-              ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            child: Column(
+              children: [
+                CampoDeBusca(),
+                const Expanded(child: CorpoDaTelaDeBusca()),
+              ],
             ),
           ),
         ),

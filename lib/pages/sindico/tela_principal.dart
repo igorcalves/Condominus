@@ -21,10 +21,9 @@ class TelaPrincipalSindico extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
           title: const TileUsuarioAppBar(),
-          flexibleSpace: Container(
-            decoration: Cores.gradientePrincipal(),
-          ),
+          flexibleSpace: Container(decoration: Cores.gradienteAppBar()),
         ),
         body: PageView(
           controller: _pageControlller,
