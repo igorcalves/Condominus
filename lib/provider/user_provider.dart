@@ -17,7 +17,7 @@ class UserProvider with ChangeNotifier {
     return [...users].isNotEmpty ? [...users] : null;
   }
 
-  void carregarTodos() async {
+  carregarTodos() async {
     await _repositorio.buscarTodos().then((value) {
       users = User.fromJsonList(value);
       _deuError = false;
@@ -33,7 +33,7 @@ class UserProvider with ChangeNotifier {
     return users.length;
   }
 
-  void escolherTipoDeBusca(String data) async {
+  escolherTipoDeBusca(String data) async {
     users = [];
 
     bool apenasNumeros = true;
@@ -55,7 +55,7 @@ class UserProvider with ChangeNotifier {
   }
 
   void _buscarUsuariosPorCpf(String cpf) async {
-    await _repositorio.bucarPorCpf(cpf).then((value) {
+    await _repositorio.buscarMoradorPorCpf(cpf).then((value) {
       users.add(User.fromJson(value));
       _deuError = false;
       trocarEstadoCarregamento();
@@ -67,16 +67,22 @@ class UserProvider with ChangeNotifier {
   }
 
   void _buscarUsuariosPorNome(String nome) async {
-    var userD = await _repositorio.buscarPorNome(nome);
-    await Future.delayed(const Duration(seconds: 1));
-    users = User.fromJsonList(userD);
+    await _repositorio.buscarMoradorPorNome(nome).then((value) {
+      users = User.fromJsonList(value);
+      _deuError = false;
+      trocarEstadoCarregamento();
+    }).catchError((error) {
+      _msgError = error.message;
+      _deuError = true;
+      trocarEstadoCarregamento();
+    });
   }
 
   void deletarUsuario(String cpf) async {
-    await Future.delayed(const Duration(seconds: 1));
+    trocarEstadoCarregamento();
 
-    _repositorio.deletarUsuario(cpf);
-    users = _repositorio.buscarTodos() as List<User>;
+    await _repositorio.deletarUsuario(cpf);
+    await carregarTodos();
   }
 
   void criarUsuario(User user) async {

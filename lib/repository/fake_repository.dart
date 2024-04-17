@@ -37,11 +37,12 @@ class FakeRepository extends ImplementarRepositorio {
     return Future.delayed(const Duration(seconds: 1), () => userList);
   }
 
+/*
   @override
   deletarUsuario(String cpf) {
     userList.removeWhere((user) => user['cpf'] == cpf);
   }
-
+*/
   @override
   criarUsuario(dynamic user) {
     user = user as User;
@@ -51,7 +52,7 @@ class FakeRepository extends ImplementarRepositorio {
   }
 
   @override
-  bucarPorCpf(String cpf) {
+  buscarMoradorPorCpf(String cpf) {
     return Future.delayed(
         const Duration(seconds: 1),
         () => userList.firstWhere((user) => user['cpf'] == cpf,
@@ -59,7 +60,7 @@ class FakeRepository extends ImplementarRepositorio {
   }
 
   @override
-  Future<List> buscarPorNome(String nome) {
+  Future<List> buscarMoradorPorNome(String nome) {
     // TODO: implement buscarPorNome
     throw UnimplementedError();
   }
@@ -67,5 +68,11 @@ class FakeRepository extends ImplementarRepositorio {
   @override
   Future<List> carregarTodosUsuarios() async {
     return userList;
+  }
+
+  @override
+  Future deletarUsuario(String cpf) {
+    // TODO: implement deletarUsuario
+    throw UnimplementedError();
   }
 }

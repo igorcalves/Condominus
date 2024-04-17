@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:Condominus/dominio/user.dart';
 import 'package:Condominus/repository/interfaceContrato.dart';
 import 'package:http/http.dart' as http;
 
@@ -10,65 +9,36 @@ class RepositorioPrincipal extends ImplementarRepositorio {
 
   RepositorioPrincipal(this._uri);
 
-  @override
-  Future<Map<String, dynamic>> bucarPorCpf(String cpf) async {
-    var response;
+  buscarMoradorGenerico(String path, String recursoDeBusca) async {
+    http.Response response;
     try {
-      var url = Uri.parse('$_uri/users/cpf?cpf=$cpf');
-      response = await http.get(url).timeout(Duration(seconds: 2));
+      var url = Uri.parse(_uri + path + recursoDeBusca);
+      response = await http.get(url).timeout(const Duration(seconds: 2));
     } catch (e) {
       throw Exception('Servidor Offline');
     }
 
     if (response.statusCode == 200) {
       return jsonDecode(utf8.decode(response.bodyBytes));
-    } else if (response.statusCode == 404) {
+    } else {
       var errorMessage = jsonDecode(utf8.decode(response.bodyBytes))['message'];
       throw Exception(errorMessage);
-    } else {
-      var errorMessage = 'Erro desconhecido';
-      try {
-        errorMessage = jsonDecode(utf8.decode(response.bodyBytes))['message'];
-      } catch (_) {
-        throw Exception('Servidor Offline');
-      }
-      throw Exception(errorMessage);
     }
+  }
+
+  @override
+  Future<Map<String, dynamic>> buscarMoradorPorCpf(String cpf) async {
+    return await buscarMoradorGenerico('/users/cpf?cpf=', cpf);
+  }
+
+  @override
+  Future<List<dynamic>> buscarMoradorPorNome(String nome) async {
+    return await buscarMoradorGenerico('/users/name?name=', nome);
   }
 
   @override
   void criarUsuario(user) {
     // TODO: implement criarUsuario
-  }
-
-  @override
-  void deletarUsuario(String cpf) {
-    // TODO: implement deletarUsuario
-  }
-
-  @override
-  Future<List> buscarPorNome(String nome) async {
-    try {
-      var url = Uri.parse('$_uri/users/name?name=$nome');
-      var response = await http.get(url).timeout(Duration(seconds: 2));
-      if (response.statusCode == 200) {
-        return jsonDecode(utf8.decode(response.bodyBytes));
-      } else {
-        var errorMessage = '';
-        try {
-          errorMessage = jsonDecode(utf8.decode(response.bodyBytes))["message"];
-        } catch (e) {
-          errorMessage = '${response.reasonPhrase}';
-        }
-        throw Exception(errorMessage);
-      }
-    } on TimeoutException catch (_) {
-      throw Exception('Tempo limite de conexão excedido');
-    } on http.ClientException catch (e) {
-      throw Exception(e);
-    } catch (e) {
-      throw Exception(e);
-    }
   }
 
   @override
@@ -82,7 +52,29 @@ class RepositorioPrincipal extends ImplementarRepositorio {
       throw Exception('Servidor Offline');
     }
 
-    var loadedUsers = jsonDecode(utf8.decode(response.bodyBytes));
-    return loadedUsers;
+    if (response.statusCode == 200) {
+      return jsonDecode(utf8.decode(response.bodyBytes));
+    } else {
+      var errorMessage = jsonDecode(utf8.decode(response.bodyBytes))['message'];
+      throw Exception(errorMessage);
+    }
+  }
+
+  @override
+  Future deletarUsuario(String cpf) async {
+    http.Response response;
+    try {
+      var url = Uri.parse('$_uri/users/disable?cpf=$cpf');
+      response = await http.put(url).timeout(const Duration(seconds: 2));
+    } catch (e) {
+      throw Exception('Servidor Offline');
+    }
+
+    if (response.statusCode == 200) {
+      return response.body;
+    } else if (response.statusCode == 404) {
+      var errorMessage = jsonDecode(utf8.decode(response.bodyBytes))['message'];
+      throw Exception(errorMessage);
+    }
   }
 }
