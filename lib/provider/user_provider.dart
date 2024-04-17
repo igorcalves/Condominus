@@ -86,9 +86,11 @@ class UserProvider with ChangeNotifier {
   }
 
   void criarUsuario(User user) async {
+    trocarEstadoCarregamento();
+
     _repositorio.criarUsuario(user);
     await Future.delayed(const Duration(seconds: 1));
-    users = _repositorio.buscarTodos() as List<User>;
+    await carregarTodos();
   }
 
   get estaCarregando {
