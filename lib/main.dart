@@ -14,8 +14,8 @@ void main() {
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
-      //create: (context) => UserProvider(RepositorioPrincipal(linux)),
-      create: (context) => UserProvider(FakeRepository()),
+      create: (context) => UserProvider(RepositorioPrincipal(linux)),
+      //create: (context) => UserProvider(FakeRepository()),
     ),
   ], child: TelaPrincipalSindico()));
 

@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 class UserProvider with ChangeNotifier {
   late List<User> users = [];
 
-  static bool estado = false;
+  bool _carregamento = false;
+  bool _deuError = false;
+  String _msgError = '';
 
   UserProvider(this._repositorio);
 
@@ -16,13 +18,15 @@ class UserProvider with ChangeNotifier {
   }
 
   void carregarTodos() async {
-    var usurariosCarreagos = await _repositorio.carregarTodosUsuarios();
-    await Future.delayed(const Duration(seconds: 1));
-
-    users = User.fromJsonList(usurariosCarreagos);
-
-    estado = false;
-    notifyListeners();
+    await _repositorio.buscarTodos().then((value) {
+      users = User.fromJsonList(value);
+      _deuError = false;
+      trocarEstadoCarregamento();
+    }).catchError((error) {
+      _msgError = error.message;
+      _deuError = true;
+      trocarEstadoCarregamento();
+    });
   }
 
   int tamanhoDaLista() {
@@ -31,9 +35,6 @@ class UserProvider with ChangeNotifier {
 
   void escolherTipoDeBusca(String data) async {
     users = [];
-
-    estado = true;
-    notifyListeners();
 
     bool apenasNumeros = true;
     for (int i = 0; i < data.length; i++) {
@@ -54,40 +55,55 @@ class UserProvider with ChangeNotifier {
   }
 
   void _buscarUsuariosPorCpf(String cpf) async {
-    var user = await _repositorio.bucarPorCpf(cpf);
-    await Future.delayed(const Duration(seconds: 1));
-    if (user is Map<String, dynamic>) {
-      users.add(User.fromJson(user));
-    } else {
-      users = [];
-    }
-
-    estado = false;
-    notifyListeners();
+    await _repositorio.bucarPorCpf(cpf).then((value) {
+      users.add(User.fromJson(value));
+      _deuError = false;
+      trocarEstadoCarregamento();
+    }).catchError((error) {
+      _msgError = error.message;
+      _deuError = true;
+      trocarEstadoCarregamento();
+    });
   }
 
   void _buscarUsuariosPorNome(String nome) async {
     var userD = await _repositorio.buscarPorNome(nome);
     await Future.delayed(const Duration(seconds: 1));
-
     users = User.fromJsonList(userD);
-    notifyListeners();
-    estado = false;
-    notifyListeners();
   }
 
-  void deletarUsuario(String cpf) {
+  void deletarUsuario(String cpf) async {
+    await Future.delayed(const Duration(seconds: 1));
+
     _repositorio.deletarUsuario(cpf);
     users = _repositorio.buscarTodos() as List<User>;
-    notifyListeners();
   }
 
-  void criarUsuario(User user) {
+  void criarUsuario(User user) async {
     _repositorio.criarUsuario(user);
+    await Future.delayed(const Duration(seconds: 1));
     users = _repositorio.buscarTodos() as List<User>;
   }
 
-  isLoading(bool estado) {
+  get estaCarregando {
+    return _carregamento;
+  }
+
+  get deuErro {
+    return _deuError;
+  }
+
+  String get msgErro {
+    return _msgError;
+  }
+
+  trocarEstadoCarregamento() {
+    if (_carregamento) {
+      _carregamento = false;
+    } else {
+      _carregamento = true;
+    }
     notifyListeners();
+    return _carregamento;
   }
 }

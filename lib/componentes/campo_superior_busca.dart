@@ -51,6 +51,7 @@ class CampoDeBusca extends StatelessWidget {
               IconePequisa(
                 onPressed: () {
                   users.escolherTipoDeBusca(textFieldController.text);
+                  users.trocarEstadoCarregamento();
                 },
               )
             ],

@@ -11,35 +11,29 @@ class RepositorioPrincipal extends ImplementarRepositorio {
   RepositorioPrincipal(this._uri);
 
   @override
-  bucarPorCpf(String cpf) async {
+  Future<Map<String, dynamic>> bucarPorCpf(String cpf) async {
+    var response;
     try {
       var url = Uri.parse('$_uri/users/cpf?cpf=$cpf');
-      var response = await http.get(url).timeout(Duration(seconds: 2));
-
-      if (response.statusCode == 200) {
-        return jsonDecode(utf8.decode(response.bodyBytes));
-      } else {
-        var errorMessage = 'Erro desconhecido';
-        try {
-          errorMessage = jsonDecode(utf8.decode(response.bodyBytes))["message"];
-        } catch (e) {
-          errorMessage = 'Erro: ${response.reasonPhrase}';
-        }
-        return {'error': 'Erro: $errorMessage'};
-      }
-    } on TimeoutException catch (_) {
-      return {'error': 'Tempo limite de conexão excedido'};
-    } on http.ClientException catch (e) {
-      return {'error': 'Erro: $e'};
+      response = await http.get(url).timeout(Duration(seconds: 2));
     } catch (e) {
-      return {'error': 'Erro inesperado: $e'};
+      throw Exception('Servidor Offline');
     }
-  }
 
-  @override
-  List buscarTodos() {
-    // TODO: implement buscarTodos
-    throw UnimplementedError();
+    if (response.statusCode == 200) {
+      return jsonDecode(utf8.decode(response.bodyBytes));
+    } else if (response.statusCode == 404) {
+      var errorMessage = jsonDecode(utf8.decode(response.bodyBytes))['message'];
+      throw Exception(errorMessage);
+    } else {
+      var errorMessage = 'Erro desconhecido';
+      try {
+        errorMessage = jsonDecode(utf8.decode(response.bodyBytes))['message'];
+      } catch (_) {
+        throw Exception('Servidor Offline');
+      }
+      throw Exception(errorMessage);
+    }
   }
 
   @override
@@ -53,21 +47,10 @@ class RepositorioPrincipal extends ImplementarRepositorio {
   }
 
   @override
-  Future<List> carregarTodosUsuarios() async {
-    var url = Uri.parse('$_uri/users');
-
-    var response = await http.get(url).timeout(Duration(seconds: 2));
-
-    List<dynamic> loadedUsers = jsonDecode(utf8.decode(response.bodyBytes));
-    return loadedUsers;
-  }
-
-  @override
   Future<List> buscarPorNome(String nome) async {
     try {
       var url = Uri.parse('$_uri/users/name?name=$nome');
       var response = await http.get(url).timeout(Duration(seconds: 2));
-
       if (response.statusCode == 200) {
         return jsonDecode(utf8.decode(response.bodyBytes));
       } else {
@@ -86,5 +69,20 @@ class RepositorioPrincipal extends ImplementarRepositorio {
     } catch (e) {
       throw Exception(e);
     }
+  }
+
+  @override
+  Future<List> buscarTodos() async {
+    var url = Uri.parse('$_uri/users');
+    var response;
+
+    try {
+      response = await http.get(url).timeout(Duration(seconds: 2));
+    } catch (_ClientSocketException) {
+      throw Exception('Servidor Offline');
+    }
+
+    var loadedUsers = jsonDecode(utf8.decode(response.bodyBytes));
+    return loadedUsers;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:Condominus/componentes/campo_superior_busca.dart';
 import 'package:Condominus/componentes/frame_usuarios.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
+import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'package:Condominus/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +32,9 @@ class AppWidget extends StatelessWidget {
             child: Column(
               children: [
                 CampoDeBusca(),
+                const SizedBox(
+                  height: 20,
+                ),
                 const Expanded(child: CorpoDaTelaDeBusca()),
               ],
             ),
@@ -46,11 +50,13 @@ class CorpoDaTelaDeBusca extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider usersProviders = Provider.of<UserProvider>(context);
+    UserProvider usersProvider = Provider.of<UserProvider>(context);
 
-    var users = usersProviders.buscarTodos();
-    if (UserProvider.estado) {
+    var users = usersProvider.buscarTodos();
+    if (usersProvider.estaCarregando) {
       return const Center(child: CircularProgressIndicator());
+    } else if (usersProvider.deuErro) {
+      return TextoPersonalizado(usersProvider.msgErro);
     } else if (users != null) {
       return ListView.builder(
         itemCount: users.length,
@@ -61,14 +67,7 @@ class CorpoDaTelaDeBusca extends StatelessWidget {
         },
       );
     } else {
-      return const Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Text('Nenhum Usuario Encontrado!'),
-        ],
-      );
+      return const Text('Nenhum Usuario Encontrado!');
     }
   }
 }

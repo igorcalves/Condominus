@@ -33,18 +33,17 @@ class FakeRepository extends ImplementarRepositorio {
   //   return users;
   // }
 
-  @override
-  List<User> buscarTodos() {
-    return User.fromJsonList(userList);
+  Future<List<dynamic>> buscarTodos() {
+    return Future.delayed(const Duration(seconds: 1), () => userList);
   }
 
   @override
-  void deletarUsuario(String cpf) {
+  deletarUsuario(String cpf) {
     userList.removeWhere((user) => user['cpf'] == cpf);
   }
 
   @override
-  void criarUsuario(dynamic user) {
+  criarUsuario(dynamic user) {
     user = user as User;
     deletarUsuario(user.cpf!);
     var userMap = user.toJson();
@@ -52,14 +51,11 @@ class FakeRepository extends ImplementarRepositorio {
   }
 
   @override
-  bucarPorCpf(String cpf) async {
-    var usuarioFiltrado = await userList
-        .firstWhere((user) => user['cpf'] == cpf, orElse: () => null);
-
-    if (usuarioFiltrado['cpf'] != null) {
-      return usuarioFiltrado;
-    }
-    return usuarioFiltrado;
+  bucarPorCpf(String cpf) {
+    return Future.delayed(
+        const Duration(seconds: 1),
+        () => userList.firstWhere((user) => user['cpf'] == cpf,
+            orElse: () => throw Exception('Usuario Não Encontrado')));
   }
 
   @override
