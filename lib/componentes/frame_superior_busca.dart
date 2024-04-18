@@ -1,12 +1,12 @@
-import 'package:Condominus/provider/user_provider.dart';
-import 'package:flutter/material.dart';
 import 'package:Condominus/componentes/icones_prontos.dart';
+import 'package:Condominus/modelosDoApp/modelos_textField.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/pages/sindico/usuarios/sub_tela_editar_criar_usuario.dart';
+import 'package:Condominus/provider/user_provider.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CampoDeBusca extends StatelessWidget {
-  //final void Function(bool, Function, String) controlarEstado;
   CampoDeBusca({super.key});
   final TextEditingController textFieldController = TextEditingController();
 
@@ -62,26 +62,4 @@ class CampoDeBusca extends StatelessWidget {
       ),
     );
   }
-}
-
-TextField campoDeTextoCadastro(
-  String campo,
-  TextEditingController controller,
-) {
-  return TextField(
-    controller: controller,
-    style: estiloDoTexto(),
-    decoration: InputDecoration(
-      labelText: campo,
-      labelStyle: estiloDoTexto(),
-      hintStyle: estiloDoTexto(),
-      focusedBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(color: Colors.white),
-      ),
-    ),
-  );
-}
-
-TextStyle estiloDoTexto() {
-  return TextStyle(color: Cores.corDoTextoPrincipal());
 }

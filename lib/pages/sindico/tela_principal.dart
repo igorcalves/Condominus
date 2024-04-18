@@ -2,7 +2,7 @@ import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'package:Condominus/pages/sindico/usuarios/tela_princial_gerenciar_usuarios.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar_item.dart';
 
@@ -18,6 +18,11 @@ class TelaPrincipalSindico extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: const [Locale('pt')],
       theme: ThemeData(
         textSelectionTheme: const TextSelectionThemeData(
           selectionHandleColor: Colors.blue,

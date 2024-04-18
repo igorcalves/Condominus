@@ -1,4 +1,4 @@
-import 'package:Condominus/dominio/user.dart';
+import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/repository/interfaceContrato.dart';
 import 'package:flutter/material.dart';
 

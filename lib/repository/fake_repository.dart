@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:Condominus/dominio/user.dart';
+import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/repository/fakeDb.dart';
 import 'package:Condominus/repository/interfaceContrato.dart';
 

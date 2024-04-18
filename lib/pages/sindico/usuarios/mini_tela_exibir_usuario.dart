@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Condominus/dominio/user.dart';
+import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 

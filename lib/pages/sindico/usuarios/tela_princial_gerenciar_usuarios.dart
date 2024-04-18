@@ -1,4 +1,5 @@
-import 'package:Condominus/componentes/campo_superior_busca.dart';
+import 'package:Condominus/componentes/frame_superior_busca.dart';
+import 'package:Condominus/modelosDoApp/modelos_textField.dart';
 import 'package:Condominus/componentes/frame_usuarios.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';

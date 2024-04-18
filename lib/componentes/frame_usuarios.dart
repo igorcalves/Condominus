@@ -1,5 +1,5 @@
 import 'package:Condominus/componentes/icones_prontos.dart';
-import 'package:Condominus/dominio/user.dart';
+import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'package:Condominus/pages/sindico/usuarios/mini_tela_exibir_usuario.dart';
 import 'package:Condominus/pages/sindico/usuarios/sub_tela_editar_criar_usuario.dart';
