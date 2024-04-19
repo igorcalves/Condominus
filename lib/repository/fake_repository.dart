@@ -73,7 +73,7 @@ class FakeRepository extends ImplementarRepositorio {
   }
 
   @override
-  Future deletarUsuario(String cpf) {
+  Future desativarUsuario(String cpf) {
     // TODO: implement deletarUsuario
     throw UnimplementedError();
   }
@@ -81,6 +81,12 @@ class FakeRepository extends ImplementarRepositorio {
   @override
   Future criarUsuario(user) {
     // TODO: implement criarUsuario
+    throw UnimplementedError();
+  }
+
+  @override
+  Future ativarUsuario(String cpf) {
+    // TODO: implement ativarUsuario
     throw UnimplementedError();
   }
 }

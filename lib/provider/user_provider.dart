@@ -59,11 +59,15 @@ class UserProvider with ChangeNotifier {
       users.add(User.fromJson(value));
       _deuError = false;
       trocarEstadoCarregamento();
-    }).catchError((error) {
-      _msgError = error.message;
-      _deuError = true;
+    }).catchError((error) => _chamarErro(error));
+  }
+
+  criarUsuario(User user) async {
+    trocarEstadoCarregamento();
+
+    await _repositorio.criarUsuario(user).then((value) {
       trocarEstadoCarregamento();
-    });
+    }).catchError((error) => _chamarErro(error));
   }
 
   void _buscarUsuariosPorNome(String nome) async {
@@ -71,34 +75,23 @@ class UserProvider with ChangeNotifier {
       users = User.fromJsonList(value);
       _deuError = false;
       trocarEstadoCarregamento();
-    }).catchError((error) {
-      _msgError = error.message;
-      _deuError = true;
-      trocarEstadoCarregamento();
-    });
+    }).catchError((error) => _chamarErro(error));
   }
 
   void deletarUsuario(String cpf) async {
     trocarEstadoCarregamento();
 
-    await _repositorio.deletarUsuario(cpf);
+    await _repositorio.desativarUsuario(cpf);
     await carregarTodos();
   }
 
-  void criarUsuario(User user) async {
+  void ativarUsuario(String cpf) async {
     trocarEstadoCarregamento();
 
-    await _repositorio
-        .criarUsuario(user)
-        .then((value) => (value) {
-              trocarEstadoCarregamento();
-            })
-        .catchError((error) {
-      _msgError = error.message;
-      _deuError = true;
+    await _repositorio.ativarUsuario(cpf).then((value) async {
       trocarEstadoCarregamento();
-    });
-    await carregarTodos();
+      await carregarTodos();
+    }).catchError((error) => _chamarErro(error));
   }
 
   get estaCarregando {
@@ -121,5 +114,11 @@ class UserProvider with ChangeNotifier {
     }
     notifyListeners();
     return _carregamento;
+  }
+
+  _chamarErro(error) {
+    _msgError = error.message;
+    _deuError = true;
+    trocarEstadoCarregamento();
   }
 }

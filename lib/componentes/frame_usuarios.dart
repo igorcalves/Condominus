@@ -17,6 +17,7 @@ class FramePessoa extends StatelessWidget {
     UserProvider users = Provider.of(context);
 
     return ListTile(
+      contentPadding: EdgeInsets.zero,
       leading: const CircleAvatar(child: Icon(Icons.person)),
       title: AbrirInfo(
         user: user,
@@ -52,7 +53,12 @@ class FramePessoa extends StatelessWidget {
                 users.deletarUsuario(user.cpf!);
               },
             ),
-          if (user.enable! == false) const IconeDeReverterDelecao()
+          if (user.enable! == false)
+            IconeDeReverterDelecao(
+              onPressed: () {
+                users.ativarUsuario(user.cpf!);
+              },
+            )
         ],
       ),
     );

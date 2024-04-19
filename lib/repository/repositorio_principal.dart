@@ -80,11 +80,12 @@ class RepositorioPrincipal extends ImplementarRepositorio {
     }
   }
 
-  @override
-  Future deletarUsuario(String cpf) async {
+  Future _ativarOuDesativarUsuario(
+      String cpf, String habilitarOuDesabilitar) async {
     http.Response response;
+
     try {
-      var url = Uri.parse('$_uri/users/disable?cpf=$cpf');
+      var url = Uri.parse('$_uri/users/$habilitarOuDesabilitar?cpf=$cpf');
       response = await http.put(url).timeout(const Duration(seconds: 2));
     } catch (e) {
       throw Exception('Servidor Offline');
@@ -92,9 +93,19 @@ class RepositorioPrincipal extends ImplementarRepositorio {
 
     if (response.statusCode == 200) {
       return response.body;
-    } else if (response.statusCode == 404) {
+    } else {
       var errorMessage = jsonDecode(utf8.decode(response.bodyBytes))['message'];
       throw Exception(errorMessage);
     }
+  }
+
+  @override
+  Future desativarUsuario(String cpf) async {
+    return await _ativarOuDesativarUsuario(cpf, 'disable');
+  }
+
+  @override
+  Future ativarUsuario(String cpf) async {
+    return await _ativarOuDesativarUsuario(cpf, 'enable');
   }
 }
