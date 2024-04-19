@@ -35,7 +35,7 @@ class User {
     data['birthDay'] = birthDay;
     data['condominiumPrice'] = condominiumPrice;
     data['apartmentNumber'] = apartmentNumber;
-    data['enable'] = true;
+    data['enabled'] = true;
     return data;
   }
 
@@ -60,7 +60,7 @@ class User {
   String toString() {
     return 'CPF: $cpf\nPhone: $phone\nTipo de usuario : $role\nEmail: $email '
         '\nData de Nascimento: ${dateFormat(birthDay!)}\nPreço do condominio: $condominiumPrice\n'
-        'numero do apartamento: $apartmentNumber\n ativo: $enable';
+        'numero do apartamento: $apartmentNumber\nstatus: ${enable! ? 'Ativado' : 'Desativado'}';
   }
 
   String dateFormat(String dataString) {
