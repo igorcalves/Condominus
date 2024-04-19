@@ -43,6 +43,7 @@ class FakeRepository extends ImplementarRepositorio {
     userList.removeWhere((user) => user['cpf'] == cpf);
   }
 */
+/*
   @override
   criarUsuario(dynamic user) {
     user = user as User;
@@ -51,6 +52,7 @@ class FakeRepository extends ImplementarRepositorio {
     userList.add(userMap);
   }
 
+*/
   @override
   buscarMoradorPorCpf(String cpf) {
     return Future.delayed(
@@ -73,6 +75,12 @@ class FakeRepository extends ImplementarRepositorio {
   @override
   Future deletarUsuario(String cpf) {
     // TODO: implement deletarUsuario
+    throw UnimplementedError();
+  }
+
+  @override
+  Future criarUsuario(user) {
+    // TODO: implement criarUsuario
     throw UnimplementedError();
   }
 }

@@ -18,6 +18,8 @@ AlertDialog telaParaAdicionarPessoas(BuildContext context, String titulo,
   TextEditingController telefoneController = TextEditingController();
   TextEditingController roleController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController senhaController = TextEditingController();
+
   TextEditingController dataDeNascimentoController = TextEditingController();
   TextEditingController condominiumPriceController = TextEditingController();
   TextEditingController numeroDoApartamentoController = TextEditingController();
@@ -28,6 +30,7 @@ AlertDialog telaParaAdicionarPessoas(BuildContext context, String titulo,
     telefoneController.text = user.phone!;
     roleController.text = user.role!;
     emailController.text = user.email!;
+    senhaController.text = user.senha!;
     dataDeNascimentoController.text = DateFormatBR.dateFormat(user.birthDay!);
     condominiumPriceController.text = user.condominiumPrice.toString();
     numeroDoApartamentoController.text = user.apartmentNumber!;
@@ -76,6 +79,11 @@ AlertDialog telaParaAdicionarPessoas(BuildContext context, String titulo,
                       controller: emailController,
                       validacao: (text) => validador.emailValido(text),
                       textoErro: 'email invalido'),
+                  campoDeTextoCadastro(
+                      campo: 'Senha',
+                      controller: senhaController,
+                      validacao: (text) => text.isEmpty,
+                      textoErro: 'Senha invalida'),
                   CampoData(
                     controllerData: dataDeNascimentoController,
                   ),
@@ -114,6 +122,7 @@ AlertDialog telaParaAdicionarPessoas(BuildContext context, String titulo,
                 userProvider.criarUsuario(User(
                     name: nomeController.text,
                     cpf: cpfController.text,
+                    senha: senhaController.text,
                     apartmentNumber: numeroDoApartamentoController.text,
                     birthDay: DateFormatBR.dateFormatDefault(
                         dataDeNascimentoController.text),
@@ -122,6 +131,7 @@ AlertDialog telaParaAdicionarPessoas(BuildContext context, String titulo,
                     email: emailController.text,
                     phone: telefoneController.text,
                     role: roleController.text));
+
                 Navigator.of(context).pop();
               }
             },

@@ -1,5 +1,5 @@
 abstract class ImplementarRepositorio {
-  void criarUsuario(dynamic user);
+  Future criarUsuario(dynamic user);
   Future<Map<String, dynamic>> buscarMoradorPorCpf(String cpf);
   Future<List<dynamic>> buscarMoradorPorNome(String nome);
 

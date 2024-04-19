@@ -1,4 +1,4 @@
-import 'package:Condominus/dominio/formatadores.dart';
+import 'package:intl/intl.dart';
 
 class User {
   String? name;
@@ -6,19 +6,23 @@ class User {
   String? phone;
   String? role;
   String? email;
+  String? senha;
   String? birthDay;
   double? condominiumPrice;
   String? apartmentNumber;
-
-  User(
-      {this.name,
-      this.cpf,
-      this.phone,
-      this.role,
-      this.email,
-      this.birthDay,
-      this.condominiumPrice,
-      this.apartmentNumber});
+  bool? enable;
+  User({
+    this.name,
+    this.cpf,
+    this.phone,
+    this.role,
+    this.email,
+    this.senha,
+    this.birthDay,
+    this.condominiumPrice,
+    this.apartmentNumber,
+    this.enable = true,
+  });
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -27,9 +31,11 @@ class User {
     data['phone'] = phone;
     data['role'] = role;
     data['email'] = email;
+    data['password'] = senha;
     data['birthDay'] = birthDay;
     data['condominiumPrice'] = condominiumPrice;
     data['apartmentNumber'] = apartmentNumber;
+    data['enable'] = true;
     return data;
   }
 
@@ -39,9 +45,11 @@ class User {
     phone = json['phone'];
     role = json['role'];
     email = json['email'];
+    senha = json['password'];
     birthDay = json['birthDay'];
     condominiumPrice = json['condominiumPrice'];
     apartmentNumber = json['apartmentNumber'];
+    enable = json['enabled'];
   }
 
   static List<User> fromJsonList(List<dynamic> jsonList) {
@@ -51,8 +59,14 @@ class User {
   @override
   String toString() {
     return 'CPF: $cpf\nPhone: $phone\nTipo de usuario : $role\nEmail: $email '
-        '\nData de Nascimento: ${DateFormatBR.dateFormat(birthDay!)}\nPreço do condominio: $condominiumPrice\n'
-        'numero do apartamento: $apartmentNumber';
+        '\nData de Nascimento: ${dateFormat(birthDay!)}\nPreço do condominio: $condominiumPrice\n'
+        'numero do apartamento: $apartmentNumber\n ativo: $enable';
+  }
+
+  String dateFormat(String dataString) {
+    DateTime data = DateTime.parse(dataString);
+    final DateFormat formatter = DateFormat('dd/MM/yyyy');
+    return formatter.format(data);
   }
 
   String getFirstNameAndLastName() {

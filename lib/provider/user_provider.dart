@@ -88,8 +88,16 @@ class UserProvider with ChangeNotifier {
   void criarUsuario(User user) async {
     trocarEstadoCarregamento();
 
-    _repositorio.criarUsuario(user);
-    await Future.delayed(const Duration(seconds: 1));
+    await _repositorio
+        .criarUsuario(user)
+        .then((value) => (value) {
+              trocarEstadoCarregamento();
+            })
+        .catchError((error) {
+      _msgError = error.message;
+      _deuError = true;
+      trocarEstadoCarregamento();
+    });
     await carregarTodos();
   }
 
