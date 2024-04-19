@@ -29,27 +29,30 @@ class FramePessoa extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconeEditar(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return Builder(
-                    builder: (BuildContext alertDialogContext) {
-                      return telaParaAdicionarPessoas(
-                          alertDialogContext, "Atualizar Cadastro",
-                          user: user);
-                    },
-                  );
-                },
-              );
-            },
-          ),
-          IconeDeletar(
-            onPressed: () {
-              users.deletarUsuario(user.cpf!);
-            },
-          ),
+          if (user.enable!)
+            IconeEditar(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Builder(
+                      builder: (BuildContext alertDialogContext) {
+                        return telaParaAdicionarPessoas(
+                            alertDialogContext, "Atualizar Cadastro",
+                            user: user);
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+          if (user.enable!)
+            IconeDeletar(
+              onPressed: () {
+                users.deletarUsuario(user.cpf!);
+              },
+            ),
+          if (user.enable! == false) const IconeDeReverterDelecao()
         ],
       ),
     );

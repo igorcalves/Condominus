@@ -58,7 +58,7 @@ class User {
 
   @override
   String toString() {
-    return 'CPF: $cpf\nPhone: $phone\nTipo de usuario : $role\nEmail: $email '
+    return 'CPF: $cpf\nPhone: $phone\nTipo de usuario : ${role == 'ADM' ? 'Sindíco' : 'Morador'}\nEmail: $email '
         '\nData de Nascimento: ${dateFormat(birthDay!)}\nPreço do condominio: $condominiumPrice\n'
         'numero do apartamento: $apartmentNumber\nstatus: ${enable! ? 'Ativado' : 'Desativado'}';
   }
