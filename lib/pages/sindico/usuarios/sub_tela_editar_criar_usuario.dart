@@ -130,7 +130,7 @@ AlertDialog telaParaAdicionarPessoas(BuildContext context, String titulo,
                         double.tryParse(condominiumPriceController.text),
                     email: emailController.text,
                     phone: telefoneController.text,
-                    role: roleController.text));
+                    role: roleController.text.toUpperCase()));
 
                 Navigator.of(context).pop();
               }
