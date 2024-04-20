@@ -81,15 +81,15 @@ class UserProvider with ChangeNotifier {
   void deletarUsuario(String cpf) async {
     trocarEstadoCarregamento();
 
-    await _repositorio.desativarUsuario(cpf);
-    await carregarTodos();
+    await _repositorio.desativarUsuario(cpf).then((value) async {
+      await carregarTodos();
+    }).catchError((error) => _chamarErro(error));
   }
 
   void ativarUsuario(String cpf) async {
     trocarEstadoCarregamento();
 
     await _repositorio.ativarUsuario(cpf).then((value) async {
-      trocarEstadoCarregamento();
       await carregarTodos();
     }).catchError((error) => _chamarErro(error));
   }
