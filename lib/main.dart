@@ -1,7 +1,5 @@
 import 'package:Condominus/pages/sindico/tela_principal.dart';
-import 'package:Condominus/pages/sindico/usuarios/tela_princial_gerenciar_usuarios.dart';
 import 'package:Condominus/provider/user_provider.dart';
-import 'package:Condominus/repository/fake_repository.dart';
 import 'package:Condominus/repository/repositorio_principal.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

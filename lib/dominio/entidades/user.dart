@@ -69,7 +69,7 @@ class User {
     return formatter.format(data);
   }
 
-  String getFirstNameAndLastName() {
+  String pegarNomeESobrenome() {
     if (name != null) {
       List<String> parts = name!.split(' ');
       if (parts.isNotEmpty) {

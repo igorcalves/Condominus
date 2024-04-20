@@ -7,7 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CampoDeBusca extends StatelessWidget {
-  CampoDeBusca({super.key});
+
+  final VoidCallback? onPressedAdicionar;
+  final void Function(String searchText)? onPressedPesquisa;
+
+
+  CampoDeBusca({required this.onPressedAdicionar, required this.onPressedPesquisa});
+  
   final TextEditingController textFieldController = TextEditingController();
 
   @override
@@ -34,25 +40,12 @@ class CampoDeBusca extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconeDeAdicionar(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Builder(
-                        builder: (BuildContext alertDialogContext) {
-                          return telaParaAdicionarPessoas(
-                              alertDialogContext, "Registro");
-                        },
-                      );
-                    },
-                  );
-                },
+                onPressed: onPressedAdicionar,
               ),
               IconePequisa(
-                onPressed: () {
-                  users.escolherTipoDeBusca(textFieldController.text);
-                  users.trocarEstadoCarregamento();
-                },
+                onPressed: () =>{
+                  onPressedPesquisa!(textFieldController.text)
+                }
               )
             ],
           ),

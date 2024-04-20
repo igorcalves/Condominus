@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class Cores {
   static Color corDoTextoPrincipal() {
     return const Color(0xffffffff);
+
   }
 
   static Color corDoAppBar() {

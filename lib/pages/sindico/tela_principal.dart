@@ -1,6 +1,7 @@
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'package:Condominus/pages/sindico/usuarios/tela_princial_gerenciar_usuarios.dart';
+import 'package:Condominus/pages/sindico/visitantes/tela_principal_gerenciar_visitantes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar.dart';
@@ -37,7 +38,11 @@ class TelaPrincipalSindico extends StatelessWidget {
         ),
         body: PageView(
           controller: _pageControlller,
-          children: <Widget>[TelaPrincipal(), AppWidget(), TelaTeste()],
+          children: <Widget>[
+            TelaPrincipal(),
+            AppWidget(),
+            TelaPrincipalVisitantes()
+          ],
         ),
         extendBody: true,
         bottomNavigationBar: RollingBottomBar(
