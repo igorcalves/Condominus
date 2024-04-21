@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/repository/fakeDb.dart';
-import 'package:Condominus/repository/interfaceContrato.dart';
+import 'package:Condominus/repository/interface_repositorio_moradores.dart';
 
-class FakeRepository extends ImplementarRepositorio {
+class FakeRepository extends InterfaceRepositorioMorador {
   List<dynamic> userList = jsonDecode(MyRepo.getData());
 
   // @override

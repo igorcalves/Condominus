@@ -1,5 +1,5 @@
 import 'package:Condominus/dominio/entidades/user.dart';
-import 'package:Condominus/repository/interfaceContrato.dart';
+import 'package:Condominus/repository/interface_repositorio_moradores.dart';
 import 'package:flutter/material.dart';
 
 class UserProvider with ChangeNotifier {
@@ -11,7 +11,7 @@ class UserProvider with ChangeNotifier {
 
   UserProvider(this._repositorio);
 
-  final ImplementarRepositorio _repositorio;
+  final InterfaceRepositorioMorador _repositorio;
 
   List<User>? buscarTodos() {
     return [...users].isNotEmpty ? [...users] : null;

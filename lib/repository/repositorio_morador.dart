@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:Condominus/repository/interfaceContrato.dart';
+import 'package:Condominus/repository/interface_repositorio_moradores.dart';
 import 'package:http/http.dart' as http;
 
-class RepositorioPrincipal extends ImplementarRepositorio {
+class RepositorioPrincipal extends InterfaceRepositorioMorador {
   final String _uri;
 
   RepositorioPrincipal(this._uri);

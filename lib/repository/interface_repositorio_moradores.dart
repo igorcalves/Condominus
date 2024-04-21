@@ -1,4 +1,4 @@
-abstract class ImplementarRepositorio {
+abstract class InterfaceRepositorioMorador {
   Future criarUsuario(dynamic user);
   Future<Map<String, dynamic>> buscarMoradorPorCpf(String cpf);
   Future<List<dynamic>> buscarMoradorPorNome(String nome);
