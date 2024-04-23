@@ -86,11 +86,11 @@ class CorpoDaTelaDeBusca extends StatelessWidget {
         itemBuilder: (context, index) {
           return ListTile(
             title: FrameTile(
-              titulo: alertaDeDados(
+              titulo: AlertaDeDados(
                 text: users[index].pegarNomeESobrenome(),
                 user: users[index],
               ),
-              subTitulo: alertaDeDados(
+              subTitulo: AlertaDeDados(
                 user: users[index],
                 text: 'Nº apt ${users[index].apartmentNumber!}',
               ),

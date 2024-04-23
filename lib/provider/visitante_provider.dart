@@ -16,16 +16,51 @@ class VisitantesProvider with ChangeNotifier {
     return [...visitantes];
   }
 
+  escolherTipoDeBusca(String data) async {
+    visitantes = [];
+
+    bool apenasNumeros = true;
+    for (int i = 0; i < data.length; i++) {
+      if (!RegExp(r'^[0-9]+$').hasMatch(data[i])) {
+        apenasNumeros = false;
+        break;
+      }
+    }
+    if (data.isNotEmpty) {
+      if (apenasNumeros) {
+        _buscarVisitantesProCpfDoMorador(data);
+      } else {
+        _buscarVisitantesPorNome(data);
+      }
+    } else {
+      carregarTodos();
+    }
+  }
+
+  _buscarVisitantesProCpfDoMorador(String cpfUser) async {
+    await _repositorioVisiante
+        .buscarVisitantePorCpfDoMorador(cpfUser)
+        .then((value) {
+      visitantes = Visitantes.fromJsonList(value);
+      _deuError = false;
+      trocarEstadoCarregamento();
+    }).catchError((error) => _chamarErro(error));
+  }
+
+  _buscarVisitantesPorNome(String nome) async {
+    await _repositorioVisiante.buscarVisitantePorNome(nome).then((value) {
+      visitantes = Visitantes.fromJsonList(value);
+      _deuError = false;
+      trocarEstadoCarregamento();
+    }).catchError((error) => _chamarErro(error));
+  }
+
   carregarTodos() async {
     await _repositorioVisiante.buscarVisitantePorNome('').then((value) {
       visitantes = Visitantes.fromJsonList(value);
       _deuError = false;
       trocarEstadoCarregamento();
-    }).catchError((error) {
-      _msgError = error.message;
-      _deuError = true;
-      trocarEstadoCarregamento();
-    });
+    }).catchError((error) => _chamarErro(error));
   }
 
   trocarEstadoCarregamento() {
@@ -36,5 +71,23 @@ class VisitantesProvider with ChangeNotifier {
     }
     notifyListeners();
     return _carregamento;
+  }
+
+  _chamarErro(error) {
+    _msgError = error.message;
+    _deuError = true;
+    trocarEstadoCarregamento();
+  }
+
+  get estaCarregando {
+    return _carregamento;
+  }
+
+  get deuErro {
+    return _deuError;
+  }
+
+  String get msgErro {
+    return _msgError;
   }
 }

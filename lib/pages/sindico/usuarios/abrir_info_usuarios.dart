@@ -1,13 +1,16 @@
 import 'package:Condominus/dominio/entidades/user.dart';
+import 'package:Condominus/dominio/entidades/visitantes.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'package:Condominus/pages/sindico/usuarios/mini_tela_exibir_usuario.dart';
 import 'package:flutter/material.dart';
 
-class alertaDeDados extends StatelessWidget {
-  const alertaDeDados({super.key, required this.user, required this.text});
+class AlertaDeDados extends StatelessWidget {
+  const AlertaDeDados(
+      {super.key, this.user, this.visitante, required this.text});
 
-  final User user;
+  final User? user;
   final String text;
+  final Visitantes? visitante;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,11 @@ class alertaDeDados extends StatelessWidget {
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            return telaDeDadosUsuario(user, context);
+            if (user != null) {
+              return telaDeDadosUsuario(user: user, context: context);
+            } else {
+              return telaDeDadosUsuario(visitante: visitante, context: context);
+            }
           },
         );
       },

@@ -18,7 +18,7 @@ class TelaPrincipalVisitantes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     VisitantesProvider visitantesProvider =
-        Provider.of<VisitantesProvider>(context);
+        Provider.of<VisitantesProvider>(context, listen: false);
 
     return MaterialApp(
       theme: ThemeData(
@@ -40,7 +40,8 @@ class TelaPrincipalVisitantes extends StatelessWidget {
                     onPressedAdicionar: () =>
                         print('Estou na tela de visitante'),
                     onPressedPesquisa: (String text) {
-                      visitantesProvider.carregarTodos();
+                      visitantesProvider.escolherTipoDeBusca(text);
+                      visitantesProvider.trocarEstadoCarregamento();
                     }),
                 const SizedBox(
                   height: 20,
@@ -86,35 +87,41 @@ class CorpoDaTelaDeBusca extends StatelessWidget {
     VisitantesProvider visitantesProvider =
         Provider.of<VisitantesProvider>(context);
     List<Visitantes> visitantes = visitantesProvider.buscarTodos();
-
-    return ListView.builder(
-        itemCount: visitantes.length,
-        itemBuilder: ((context, index) {
-          var visitante = visitantes[index];
-          return ListTile(
-            title: FrameTile(
-              estaAtivo: true,
-              titulo: alertaDeDados(
-                  text: visitante.pegarNomeESobrenome(), user: visitante1),
-              subTitulo: Row(
-                children: [
-                  const Icon(Icons.chevron_right),
-                  alertaDeDados(
+    if (visitantesProvider.estaCarregando) {
+      return const Center(child: CircularProgressIndicator());
+    } else {
+      return ListView.builder(
+          itemCount: visitantes.length,
+          itemBuilder: ((context, index) {
+            var visitante = visitantes[index];
+            return ListTile(
+              title: FrameTile(
+                estaAtivo: true,
+                titulo: AlertaDeDados(
+                  text: visitante.pegarNomeESobrenome(),
+                  visitante: visitante,
+                ),
+                subTitulo: Row(
+                  children: [
+                    const Icon(Icons.chevron_right),
+                    AlertaDeDados(
                       text: visitante.user!.pegarNomeESobrenome(),
-                      user: johnDoe),
-                ],
+                      user: visitante.user,
+                    ),
+                  ],
+                ),
+                onPressedIconeEditar: () {
+                  print('fui pressionado');
+                },
+                onPressedIconeDeletar: () {
+                  print('fui pressionado');
+                },
+                onPressedIconeReverter: () {
+                  print('fui pressionado');
+                },
               ),
-              onPressedIconeEditar: () {
-                print('fui pressionado');
-              },
-              onPressedIconeDeletar: () {
-                print('fui pressionado');
-              },
-              onPressedIconeReverter: () {
-                print('fui pressionado');
-              },
-            ),
-          );
-        }));
+            );
+          }));
+    }
   }
 }

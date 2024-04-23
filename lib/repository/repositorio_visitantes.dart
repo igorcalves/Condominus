@@ -11,13 +11,11 @@ class RepositorioVisitantes extends InterfaceRepositorioVisiante {
 
   buscadorGenerico(String path, String recursoDeBusca) async {
     http.Response response;
-    String error = '';
     try {
       var url = Uri.parse(_uri + path + recursoDeBusca);
       response = await http.get(url).timeout(const Duration(seconds: 2));
-      error = response.body;
     } catch (e) {
-      throw Exception(error);
+      throw Exception('Servidor Offiline');
     }
 
     if (response.statusCode == 200) {
@@ -29,19 +27,12 @@ class RepositorioVisitantes extends InterfaceRepositorioVisiante {
   }
 
   @override
-  Future buscarVisitantePorCpf(String cpf) {
-    // TODO: implement buscarVisitantePorCpf
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List> buscarVisitantePorCpfDoMorador(String cpfDoMorador) {
-    // TODO: implement buscarVisitantePorCpfDoMorador
-    throw UnimplementedError();
+  Future<List> buscarVisitantePorCpfDoMorador(String cpfDoMorador) async {
+    return await buscadorGenerico('/users/visitors/cpfuser?cpf=', cpfDoMorador);
   }
 
   @override
   Future<List<dynamic>> buscarVisitantePorNome(String nome) async {
-    return buscadorGenerico('/name?name=', nome);
+    return await buscadorGenerico('/users/visitors/name?name=', nome);
   }
 }
