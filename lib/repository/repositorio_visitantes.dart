@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:Condominus/dominio/entidades/visitantes.dart';
 import 'package:Condominus/repository/interface_repositorio_visitantes.dart';
 import 'package:http/http.dart' as http;
 

@@ -89,6 +89,8 @@ class CorpoDaTelaDeBusca extends StatelessWidget {
     List<Visitantes> visitantes = visitantesProvider.buscarTodos();
     if (visitantesProvider.estaCarregando) {
       return const Center(child: CircularProgressIndicator());
+    } else if (visitantesProvider.deuErro) {
+      return TextoPersonalizado(visitantesProvider.msgErro);
     } else {
       return ListView.builder(
           itemCount: visitantes.length,
