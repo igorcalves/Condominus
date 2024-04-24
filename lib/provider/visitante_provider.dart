@@ -63,6 +63,13 @@ class VisitantesProvider with ChangeNotifier {
     }).catchError((error) => _chamarErro(error));
   }
 
+  deletarVisitante(String cpf) async {
+    await _repositorioVisiante
+        .deletarVisitante(cpf)
+        .then((value) async {})
+        .catchError((error) => _chamarErro(error));
+  }
+
   trocarEstadoCarregamento() {
     if (_carregamento) {
       _carregamento = false;

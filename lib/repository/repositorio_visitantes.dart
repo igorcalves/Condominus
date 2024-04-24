@@ -34,4 +34,22 @@ class RepositorioVisitantes extends InterfaceRepositorioVisiante {
   Future<List<dynamic>> buscarVisitantePorNome(String nome) async {
     return await buscadorGenerico('/users/visitors/name?name=', nome);
   }
+
+  @override
+  Future deletarVisitante(String cpf) async {
+    http.Response response;
+    try {
+      var url = Uri.parse('$_uri/users/visitors?cpf=$cpf');
+      response = await http.delete(url).timeout(const Duration(seconds: 2));
+    } catch (e) {
+      throw Exception('Servidor Offiline');
+    }
+
+    if (response.statusCode == 200) {
+      throw Exception(response.body);
+    } else {
+      var errorMessage = jsonDecode(utf8.decode(response.bodyBytes))['message'];
+      throw Exception(errorMessage);
+    }
+  }
 }

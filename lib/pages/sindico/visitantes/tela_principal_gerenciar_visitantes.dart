@@ -90,7 +90,10 @@ class CorpoDaTelaDeBusca extends StatelessWidget {
     if (visitantesProvider.estaCarregando) {
       return const Center(child: CircularProgressIndicator());
     } else if (visitantesProvider.deuErro) {
-      return TextoPersonalizado(visitantesProvider.msgErro);
+      return TextoPersonalizado(
+        visitantesProvider.msgErro,
+        tamanho: 12,
+      );
     } else {
       return ListView.builder(
           itemCount: visitantes.length,
@@ -116,10 +119,8 @@ class CorpoDaTelaDeBusca extends StatelessWidget {
                   print('fui pressionado');
                 },
                 onPressedIconeDeletar: () {
-                  print('fui pressionado');
-                },
-                onPressedIconeReverter: () {
-                  print('fui pressionado');
+                  visitantesProvider.trocarEstadoCarregamento();
+                  visitantesProvider.deletarVisitante(visitante.cpf!);
                 },
               ),
             );

@@ -1,11 +1,7 @@
 import 'package:Condominus/componentes/icones_prontos.dart';
-import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:flutter/material.dart';
 
-
 class FrameTile extends StatelessWidget {
-
-
   final bool estaAtivo;
   final Widget titulo;
   final Widget subTitulo;
@@ -13,21 +9,17 @@ class FrameTile extends StatelessWidget {
   final VoidCallback? onPressedIconeDeletar;
   final VoidCallback? onPressedIconeReverter;
 
+  const FrameTile(
+      {super.key,
+      required this.estaAtivo,
+      required this.titulo,
+      required this.subTitulo,
+      required this.onPressedIconeEditar,
+      required this.onPressedIconeDeletar,
+      this.onPressedIconeReverter});
 
-
-
-  const FrameTile({super.key, required this.estaAtivo,
-  required this.titulo,
-  required this.subTitulo,
-  required this.onPressedIconeEditar,
-  required this.onPressedIconeDeletar,
-  required this.onPressedIconeReverter
-  
-  });
-
-  @override 
+  @override
   Widget build(BuildContext context) {
-
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: const CircleAvatar(child: Icon(Icons.person)),
@@ -36,21 +28,12 @@ class FrameTile extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (estaAtivo)
-            IconeEditar(
-              onPressed: onPressedIconeEditar
-            ),
-          if (estaAtivo)
-            IconeDeletar(
-              onPressed: onPressedIconeDeletar
-            ),
+          if (estaAtivo) IconeEditar(onPressed: onPressedIconeEditar),
+          if (estaAtivo) IconeDeletar(onPressed: onPressedIconeDeletar),
           if (estaAtivo == false)
-            IconeDeReverterDelecao(
-              onPressed: onPressedIconeReverter
-            )
+            IconeDeReverterDelecao(onPressed: onPressedIconeReverter)
         ],
       ),
     );
   }
 }
-
