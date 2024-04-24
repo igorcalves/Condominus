@@ -18,6 +18,8 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider usersProvider =
+        Provider.of<UserProvider>(context, listen: false);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -41,8 +43,12 @@ class AppWidget extends StatelessWidget {
                     builder: (BuildContext context) {
                       return Builder(
                         builder: (BuildContext alertDialogContext) {
-                          return telaParaAdicionarPessoas(
-                              alertDialogContext, "Registro");
+                          return SubTelaParaAdicionarOuAtualizar(
+                              onPressedEditar: (User user) {
+                                usersProvider.trocarEstadoCarregamento();
+                                usersProvider.criarUsuario(user);
+                              },
+                              titulo: "Registro");
                         },
                       );
                     },
@@ -115,13 +121,20 @@ class CorpoDaTelaDeBusca extends StatelessWidget {
 
   Future<dynamic> _funcionalidadeDoBotaoEditar(
       BuildContext context, List<User> users, int index) {
+    UserProvider usersProvider =
+        Provider.of<UserProvider>(context, listen: false);
+
     return showDialog(
       context: context,
       builder: (BuildContext context) {
         return Builder(
           builder: (BuildContext alertDialogContext) {
-            return telaParaAdicionarPessoas(
-                alertDialogContext, "Atualizar Cadastro",
+            return SubTelaParaAdicionarOuAtualizar(
+                onPressedEditar: (User user) {
+                  usersProvider.trocarEstadoCarregamento();
+                  usersProvider.atualizarUsuario(user);
+                },
+                titulo: "Atualizar Cadastro",
                 user: users[index]);
           },
         );

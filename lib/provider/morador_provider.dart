@@ -63,10 +63,14 @@ class UserProvider with ChangeNotifier {
   }
 
   criarUsuario(User user) async {
-    trocarEstadoCarregamento();
+    await _repositorio.criarUsuario(user).then((value) async {
+      await carregarTodos();
+    }).catchError((error) => _chamarErro(error));
+  }
 
-    await _repositorio.criarUsuario(user).then((value) {
-      trocarEstadoCarregamento();
+  atualizarUsuario(User user) async {
+    await _repositorio.atualizarUsuario(user).then((value) async {
+      await carregarTodos();
     }).catchError((error) => _chamarErro(error));
   }
 

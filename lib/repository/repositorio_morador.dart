@@ -64,11 +64,11 @@ class RepositorioPrincipal extends InterfaceRepositorioMorador {
   @override
   Future<List> buscarTodos() async {
     var url = Uri.parse('$_uri/users');
-    var response;
+    http.Response response;
 
     try {
-      response = await http.get(url).timeout(Duration(seconds: 2));
-    } catch (_ClientSocketException) {
+      response = await http.get(url).timeout(const Duration(seconds: 2));
+    } catch (e) {
       throw Exception('Servidor Offline');
     }
 
@@ -107,5 +107,30 @@ class RepositorioPrincipal extends InterfaceRepositorioMorador {
   @override
   Future ativarUsuario(String cpf) async {
     return await _ativarOuDesativarUsuario(cpf, 'enable');
+  }
+
+  @override
+  Future atualizarUsuario(user) async {
+    http.Response response;
+    try {
+      var url = Uri.parse('$_uri/users/update');
+      response = await http.put(url, body: jsonEncode(user), headers: {
+        "Content-Type": "application/json",
+      });
+    } catch (e) {
+      throw Exception('Servidor Offline');
+    }
+
+    if (response.statusCode == 200) {
+      if (response.headers['content-type']?.contains('application/json') ??
+          false) {
+        return jsonDecode(utf8.decode(response.bodyBytes))['message'];
+      } else {
+        return utf8.decode(response.bodyBytes);
+      }
+    } else {
+      var errorMessage = jsonDecode(utf8.decode(response.bodyBytes))['message'];
+      throw Exception(errorMessage);
+    }
   }
 }

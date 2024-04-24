@@ -1,11 +1,7 @@
 import 'package:Condominus/dominio/formatadores.dart';
-import 'package:Condominus/modelosDoApp/modelo_texto.dart';
-import 'package:Condominus/provider/morador_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:Condominus/componentes/icones_prontos.dart';
+
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
-import 'package:Condominus/pages/sindico/usuarios/sub_tela_editar_criar_usuario.dart';
-import 'package:provider/provider.dart';
 
 TextStyle estiloDoTexto() {
   return TextStyle(color: Cores.corDoTextoPrincipal());
@@ -21,7 +17,10 @@ TextFormField campoDeTextoCadastro(
     required String campo,
     required String textoErro}) {
   return TextFormField(
+    style: estiloDoTexto(),
+    cursorColor: Colors.white,
     controller: controller,
+    enableSuggestions: false,
     decoration: InputDecoration(
       labelText: campo,
       labelStyle: estiloDoTexto(),
@@ -47,6 +46,7 @@ class CampoData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      style: estiloDoTexto(),
       controller: controllerData,
       decoration: InputDecoration(
         labelText: 'Date',

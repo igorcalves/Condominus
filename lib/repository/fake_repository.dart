@@ -89,4 +89,10 @@ class FakeRepository extends InterfaceRepositorioMorador {
     // TODO: implement ativarUsuario
     throw UnimplementedError();
   }
+
+  @override
+  Future atualizarUsuario(user) {
+    // TODO: implement AtualizarUsuario
+    throw UnimplementedError();
+  }
 }
