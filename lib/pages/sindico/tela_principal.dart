@@ -1,5 +1,6 @@
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
+import 'package:Condominus/pages/sindico/tela_do_logo.dart';
 import 'package:Condominus/pages/sindico/usuarios/tela_princial_gerenciar_usuarios.dart';
 import 'package:Condominus/pages/sindico/visitantes/tela_principal_gerenciar_visitantes.dart';
 import 'package:flutter/material.dart';
@@ -39,9 +40,9 @@ class TelaPrincipalSindico extends StatelessWidget {
         body: PageView(
           controller: _pageControlller,
           children: <Widget>[
-            TelaPrincipal(),
-            AppWidget(),
-            TelaPrincipalVisitantes()
+            const TelaPrincipal(),
+            TelaParaGerenciarMoradores(),
+            const TelaParaGerenciarVisitantes()
           ],
         ),
         extendBody: true,
@@ -84,44 +85,6 @@ class TileUsuarioAppBar extends StatelessWidget {
             )),
         const TextoPersonalizado('Nome Sindico')
       ],
-    );
-  }
-}
-
-class TelaPrincipal extends StatelessWidget {
-  const TelaPrincipal({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Container(
-          decoration: Cores.gradientePrincipal(),
-          child: Center(
-            child: Image.asset('assets/imagens/logoBranco.png'),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class TelaTeste extends StatelessWidget {
-  const TelaTeste({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Container(
-          decoration: Cores.gradientePrincipal(),
-          child: Center(
-            child: Image.asset('assets/imagens/logo.png'),
-          ),
-        ),
-      ),
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:Condominus/componentes/frame_superior_busca.dart';
 import 'package:Condominus/componentes/frame_tile.dart';
-import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/dominio/entidades/visitantes.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
@@ -9,8 +8,8 @@ import 'package:Condominus/provider/visitante_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class TelaPrincipalVisitantes extends StatelessWidget {
-  const TelaPrincipalVisitantes({super.key});
+class TelaParaGerenciarVisitantes extends StatelessWidget {
+  const TelaParaGerenciarVisitantes({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +74,7 @@ class CorpoDaTelaDeBusca extends StatelessWidget {
               title: FrameTile(
                 estaAtivo: true,
                 titulo: AlertaDeDados(
-                  text: visitante.pegarNomeESobrenome(),
+                  text: visitante.name!,
                   visitante: visitante,
                 ),
                 subTitulo: Row(
