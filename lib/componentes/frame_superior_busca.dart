@@ -27,6 +27,7 @@ class CampoDeBusca extends StatelessWidget {
         ),
       ),
       child: TextField(
+        onSubmitted: (_) => onPressedPesquisa!(textFieldController.text),
         controller: textFieldController,
         style: estiloDoTexto(),
         decoration: InputDecoration(
