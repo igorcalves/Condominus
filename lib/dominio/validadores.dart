@@ -1,4 +1,4 @@
-import 'package:Condominus/dominio/interfaceValidadora.dart';
+import 'package:Condominus/dominio/interface_de_validacao.dart';
 
 class Validar extends Validadores {
   bool _validarRegEx(text, regEx) {

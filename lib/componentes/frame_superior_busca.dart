@@ -1,5 +1,5 @@
 import 'package:Condominus/componentes/icones_prontos.dart';
-import 'package:Condominus/modelosDoApp/modelos_textField.dart';
+import 'package:Condominus/modelosDoApp/modelos_text_field.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +8,9 @@ class CampoDeBusca extends StatelessWidget {
   final void Function(String searchText)? onPressedPesquisa;
 
   CampoDeBusca(
-      {required this.onPressedAdicionar, required this.onPressedPesquisa});
+      {super.key,
+      required this.onPressedAdicionar,
+      required this.onPressedPesquisa});
 
   final TextEditingController textFieldController = TextEditingController();
 
