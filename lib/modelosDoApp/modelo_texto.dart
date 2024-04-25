@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:Condominus/modelosDoApp/modelos_textField.dart';
 
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 
@@ -32,13 +31,13 @@ class TextoBuscarUsuario extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
-          border: Border.all(
-            color: Cores.corDoTextoPrincipal(),
-            width: 1.0,
-          ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
+        border: Border.all(
+          color: Cores.corDoTextoPrincipal(),
+          width: 1.0,
         ),
-        child: Text('asdas'));
+      ),
+    );
   }
 }

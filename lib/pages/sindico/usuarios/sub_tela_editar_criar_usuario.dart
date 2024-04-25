@@ -1,13 +1,12 @@
 import 'package:Condominus/dominio/formatadores.dart';
 import 'package:Condominus/dominio/validadores.dart';
-import 'package:Condominus/provider/morador_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/modelosDoApp/modelos_textField.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
-import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class SubTelaParaAdicionarOuAtualizar extends StatelessWidget {
   SubTelaParaAdicionarOuAtualizar(
       {super.key,
@@ -48,7 +47,6 @@ class SubTelaParaAdicionarOuAtualizar extends StatelessWidget {
       numeroDoApartamentoController.text = user!.apartmentNumber!;
     }
 
-    UserProvider userProvider = Provider.of(context);
     return AlertDialog(
       title: TextoPersonalizado(titulo),
       backgroundColor: Cores.corDoAlertDialog(),

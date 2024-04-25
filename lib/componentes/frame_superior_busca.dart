@@ -1,10 +1,7 @@
 import 'package:Condominus/componentes/icones_prontos.dart';
 import 'package:Condominus/modelosDoApp/modelos_textField.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
-import 'package:Condominus/pages/sindico/usuarios/sub_tela_editar_criar_usuario.dart';
-import 'package:Condominus/provider/morador_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CampoDeBusca extends StatelessWidget {
   final VoidCallback? onPressedAdicionar;
@@ -17,7 +14,6 @@ class CampoDeBusca extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserProvider users = Provider.of(context, listen: false);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),

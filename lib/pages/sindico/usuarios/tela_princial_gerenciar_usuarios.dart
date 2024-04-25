@@ -1,5 +1,4 @@
 import 'package:Condominus/componentes/frame_superior_busca.dart';
-import 'package:Condominus/componentes/icones_prontos.dart';
 import 'package:Condominus/componentes/frame_tile.dart';
 import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
@@ -10,6 +9,7 @@ import 'package:Condominus/provider/morador_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class AppWidget extends StatelessWidget {
   var users;
 
