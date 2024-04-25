@@ -1,3 +1,5 @@
+/*
+
 import 'dart:convert';
 
 import 'package:Condominus/dominio/entidades/user.dart';
@@ -96,3 +98,6 @@ class FakeRepository extends InterfaceRepositorioMorador {
     throw UnimplementedError();
   }
 }
+
+
+*/
