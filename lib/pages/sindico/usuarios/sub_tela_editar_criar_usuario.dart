@@ -8,11 +8,15 @@ import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 
 // ignore: must_be_immutable
 class SubTelaParaAdicionarOuAtualizar extends StatelessWidget {
-  SubTelaParaAdicionarOuAtualizar(
-      {super.key,
-      required this.titulo,
-      this.user,
-      required this.onPressedEditar});
+  SubTelaParaAdicionarOuAtualizar({
+    super.key,
+    required this.titulo,
+    required this.onPressedEditar,
+    required this.botaoDeEnviar,
+    this.user,
+  });
+
+  final String botaoDeEnviar;
   final String titulo;
   final User? user;
 
@@ -145,7 +149,7 @@ class SubTelaParaAdicionarOuAtualizar extends StatelessWidget {
                   Navigator.of(context).pop();
                 }
               },
-              child: const TextoPersonalizado('Registrar'),
+              child: TextoPersonalizado(botaoDeEnviar),
             ),
           ],
         )
