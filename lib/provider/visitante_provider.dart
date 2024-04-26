@@ -37,6 +37,13 @@ class VisitantesProvider with ChangeNotifier {
     }
   }
 
+  criarVisitante(Visitantes visitante) async {
+    trocarEstadoCarregamento();
+    await _repositorioVisiante.criarVisitante(visitante).then((value) async {
+      await carregarTodos();
+    }).catchError((error) => _chamarErro(error));
+  }
+
   _buscarVisitantesProCpfDoMorador(String cpfUser) async {
     await _repositorioVisiante
         .buscarVisitantePorCpfDoMorador(cpfUser)

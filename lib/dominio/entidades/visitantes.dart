@@ -8,6 +8,7 @@ class Visitantes {
   String? registrationDate;
   String? phone;
   User? user;
+  String? cpfUser;
 
   Visitantes(
       {this.name,
@@ -16,6 +17,7 @@ class Visitantes {
       this.email,
       this.registrationDate,
       this.phone,
+      this.cpfUser,
       this.user});
 
   Visitantes.fromJson(Map<String, dynamic> json) {
@@ -36,7 +38,7 @@ class Visitantes {
       'email': email,
       'registrationDate': registrationDate,
       'phone': phone,
-      'user': user
+      'cpfUser': cpfUser
     };
   }
 
@@ -46,7 +48,7 @@ class Visitantes {
 
   @override
   String toString() {
-    return 'name: $name\ncpf: $cpf\nbirthDay: $birthDay\nemail: $email\nregistrationDate: $registrationDate\nphone: $phone\ncpf Do Morador: ${user!.cpf}';
+    return 'name: $name\ncpf: $cpf\nbirthDay: $birthDay\nemail: $email\ndata de registro: $registrationDate\nphone: $phone\ncpf Do Morador: ${user!.cpf}';
   }
 
   String pegarNomeESobrenome() {

@@ -40,7 +40,7 @@ class TelaParaGerenciarMoradores extends StatelessWidget {
                         builder: (BuildContext alertDialogContext) {
                           return SubTelaParaAdicionarOuAtualizar(
                               botaoDeEnviar: 'Criar',
-                              onPressedEditar: (User user) {
+                              onPressedCriarAtualizar: (User user) {
                                 usersProvider.trocarEstadoCarregamento();
                                 usersProvider.criarUsuario(user);
                               },

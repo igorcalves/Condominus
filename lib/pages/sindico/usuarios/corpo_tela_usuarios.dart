@@ -65,7 +65,7 @@ class CorpoDaTelaDeGerenciarUsuario extends StatelessWidget {
           builder: (BuildContext alertDialogContext) {
             return SubTelaParaAdicionarOuAtualizar(
                 botaoDeEnviar: 'Atualizar',
-                onPressedEditar: (User user) {
+                onPressedCriarAtualizar: (User user) {
                   usersProvider.trocarEstadoCarregamento();
                   usersProvider.atualizarUsuario(user);
                 },

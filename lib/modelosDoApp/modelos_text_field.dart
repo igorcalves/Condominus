@@ -41,7 +41,10 @@ TextFormField campoDeTextoCadastro(
 
 class CampoData extends StatelessWidget {
   final TextEditingController controllerData;
-  const CampoData({required this.controllerData, super.key});
+  const CampoData(
+      {required this.controllerData, super.key, required this.titulo});
+
+  final String titulo;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +52,7 @@ class CampoData extends StatelessWidget {
       style: estiloDoTexto(),
       controller: controllerData,
       decoration: InputDecoration(
-        labelText: 'Date',
+        labelText: titulo,
         prefixIcon: const Icon(Icons.calendar_today),
         labelStyle: estiloDoTexto(),
         hintStyle: estiloDoTexto(),

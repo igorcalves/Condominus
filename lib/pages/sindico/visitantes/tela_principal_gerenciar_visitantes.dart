@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:Condominus/componentes/frame_superior_busca.dart';
 import 'package:Condominus/componentes/frame_tile.dart';
+import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/dominio/entidades/visitantes.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'package:Condominus/pages/sindico/usuarios/abrir_info_usuarios.dart';
+import 'package:Condominus/pages/sindico/visitantes/sub_tela_editar_criar_visitante.dart';
 import 'package:Condominus/provider/visitante_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,17 +36,40 @@ class TelaParaGerenciarVisitantes extends StatelessWidget {
             decoration: Cores.gradientePrincipal(),
             child: Column(
               children: [
-                CampoDeBusca(
-                    onPressedAdicionar: () =>
-                        print('Estou na tela de visitante'),
-                    onPressedPesquisa: (String text) {
-                      visitantesProvider.escolherTipoDeBusca(text);
-                      visitantesProvider.trocarEstadoCarregamento();
-                    }),
+                CampoDeBusca(onPressedAdicionar: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Builder(
+                        builder: (BuildContext alertDialogContext) {
+                          return SubTelaParaAdicionarOuAtualizarVisitantes(
+                              botaoDeEnviar: 'Criar',
+                              visitante: Visitantes(
+                                  name: 'test da silva',
+                                  cpf: '12345678911',
+                                  birthDay: '1840-12-12',
+                                  phone: '1231232312',
+                                  email: 'test@outmook.com',
+                                  cpfUser: '47776777777',
+                                  user: User(cpf: '47776777777')),
+                              onPressedCriarAtualizar:
+                                  (Visitantes visitanteParaAdicionar) {
+                                visitantesProvider
+                                    .criarVisitante(visitanteParaAdicionar);
+                              },
+                              titulo: "Registro");
+                        },
+                      );
+                    },
+                  );
+                }, onPressedPesquisa: (String text) {
+                  visitantesProvider.escolherTipoDeBusca(text);
+                  visitantesProvider.trocarEstadoCarregamento();
+                }),
                 const SizedBox(
                   height: 20,
                 ),
-                Expanded(child: CorpoDaTelaDeBusca()),
+                const Expanded(child: CorpoDaTelaDeBusca()),
               ],
             )),
       ),
@@ -86,9 +113,7 @@ class CorpoDaTelaDeBusca extends StatelessWidget {
                     ),
                   ],
                 ),
-                onPressedIconeEditar: () {
-                  print('fui pressionado');
-                },
+                onPressedIconeEditar: () {},
                 onPressedIconeDeletar: () {
                   visitantesProvider.trocarEstadoCarregamento();
                   visitantesProvider.deletarVisitante(visitante.cpf!);
