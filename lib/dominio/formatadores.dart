@@ -18,4 +18,22 @@ class DateFormatBR {
   static String dataParaEnviar(data, hora) {
     return '${data}T${hora}Z';
   }
+
+  static String extrairHoras(String dataHora) {
+    if (dataHora.length >= 11) {
+      String horas = dataHora.substring(11, 16);
+      return horas;
+    } else {
+      return 'Formato de data inválido';
+    }
+  }
+
+  static String extrairData(String dataHora) {
+    if (dataHora.length >= 11) {
+      String horas = dataHora.substring(0, 10);
+      return horas;
+    } else {
+      return 'Formato de data inválido';
+    }
+  }
 }

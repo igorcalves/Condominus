@@ -105,3 +105,14 @@ class IconeDeAdicionar extends StatelessWidget {
     );
   }
 }
+
+Icon escolherItemDaReserva(int id) {
+  if (id == 0)
+    return iconeChurrassqueira();
+  else if (id == 1)
+    return iconePiscina();
+  else if (id == 2)
+    return iconeAreaDeTrabalho();
+  else
+    return iconeSalaoDeFestas();
+}

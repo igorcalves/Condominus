@@ -1,7 +1,9 @@
 import 'package:Condominus/pages/tela_principal.dart';
 import 'package:Condominus/provider/morador_provider.dart';
+import 'package:Condominus/provider/reservar_provider.dart';
 import 'package:Condominus/provider/visitante_provider.dart';
 import 'package:Condominus/repository/repositorio_morador.dart';
+import 'package:Condominus/repository/repositorio_revervas.dart';
 import 'package:Condominus/repository/repositorio_visitantes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,10 @@ void main() {
     ),
     ChangeNotifierProvider(
       create: (context) => VisitantesProvider(RepositorioVisitantes(linux)),
+      //create: (context) => UserProvider(FakeRepository()),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => ReservaProvider(RepositorioDeReservas(linux)),
       //create: (context) => UserProvider(FakeRepository()),
     ),
   ], child: TelaPrincipalSindico()));

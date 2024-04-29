@@ -103,17 +103,15 @@ class SubTelaParaAdicionarReserva extends StatelessWidget {
               onPressed: () {
                 if (_formKey.currentState!.validate() &&
                     dataDoAgendamentoController.text.isNotEmpty) {
-                  Reserva r = Reserva(
-                      cpf: '1234',
+                  onPressedCriarAtualizar!(Reserva(
+                      cpf: '47776777777',
                       areaId: id,
                       startOfScheduling: DateFormatBR.dataParaEnviar(
                           dataDoAgendamentoController.text,
                           incioDoAgendamentoController.text),
                       endOfScheduling: DateFormatBR.dataParaEnviar(
                           dataDoAgendamentoController.text,
-                          finalDoAgendamentoController.text));
-
-                  print(jsonEncode(r.toJson()));
+                          finalDoAgendamentoController.text)));
 
                   Navigator.of(context).pop();
                 }
