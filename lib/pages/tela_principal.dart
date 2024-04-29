@@ -1,5 +1,6 @@
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
+import 'package:Condominus/pages/morador/tela_reservas.dart';
 import 'package:Condominus/pages/sindico/tela_do_logo.dart';
 import 'package:Condominus/pages/sindico/usuarios/tela_princial_gerenciar_usuarios.dart';
 import 'package:Condominus/pages/sindico/visitantes/tela_principal_gerenciar_visitantes.dart';
@@ -40,7 +41,7 @@ class TelaPrincipalSindico extends StatelessWidget {
         body: PageView(
           controller: _pageControlller,
           children: <Widget>[
-            const TelaPrincipal(),
+            const TelaDeReservaDeMoradores(),
             TelaParaGerenciarMoradores(),
             const TelaParaGerenciarVisitantes()
           ],

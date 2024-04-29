@@ -74,6 +74,23 @@ class IconePequisa extends StatelessWidget {
   }
 }
 
+Icon iconePiscina() {
+  return Icon(Icons.pool, color: Cores.corDoTextoPrincipal(), size: 27);
+}
+
+Icon iconeAreaDeTrabalho() {
+  return Icon(Icons.laptop_mac, color: Cores.corDoTextoPrincipal(), size: 27);
+}
+
+Icon iconeSalaoDeFestas() {
+  return Icon(Icons.celebration, color: Cores.corDoTextoPrincipal(), size: 27);
+}
+
+Icon iconeChurrassqueira() {
+  return Icon(Icons.outdoor_grill,
+      color: Cores.corDoTextoPrincipal(), size: 27);
+}
+
 class IconeDeAdicionar extends StatelessWidget {
   final VoidCallback? onPressed;
 

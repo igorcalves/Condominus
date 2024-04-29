@@ -11,12 +11,17 @@ TextStyle estiloDoTextoDeErro() {
   return const TextStyle(color: Colors.redAccent, fontSize: 14);
 }
 
-TextFormField campoDeTextoCadastro(
-    {required TextEditingController controller,
-    required bool Function(String text) validacao,
-    required String campo,
-    required String textoErro}) {
+TextFormField campoDeTextoCadastro({
+  required TextEditingController controller,
+  required bool Function(String text) validacao,
+  required String campo,
+  required String textoErro,
+  bool somenteVisualizacao = false,
+  var teclado = TextInputType.name,
+}) {
   return TextFormField(
+    keyboardType: teclado,
+    readOnly: somenteVisualizacao,
     style: estiloDoTexto(),
     cursorColor: Colors.white,
     controller: controller,

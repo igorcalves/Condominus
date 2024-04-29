@@ -1,4 +1,4 @@
-import 'package:Condominus/pages/sindico/tela_principal.dart';
+import 'package:Condominus/pages/tela_principal.dart';
 import 'package:Condominus/provider/morador_provider.dart';
 import 'package:Condominus/provider/visitante_provider.dart';
 import 'package:Condominus/repository/repositorio_morador.dart';
