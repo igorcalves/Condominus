@@ -23,7 +23,7 @@ class ReservaProvider with ChangeNotifier {
   carregarTodos(String cpf) async {
     await repositotio.buscarTodasReservas(cpf).then((value) {
       reservas = Reserva.fromJsonList(value);
-      notifyListeners();
+      trocarEstadoCarregamento();
       _deuError = false;
     }).catchError((error) => _chamarErro(error));
   }
@@ -36,7 +36,42 @@ class ReservaProvider with ChangeNotifier {
   }
 
   _chamarErro(error) {
+    trocarEstadoCarregamento();
+
     _msgError = error.message;
     _deuError = true;
+    notifyListeners();
+  }
+
+  get estaCarregando {
+    return _carregamento;
+  }
+
+  get deuErro {
+    return _deuError;
+  }
+
+  String get msgErro {
+    return _msgError;
+  }
+
+  trocarEstadoCarregamento() {
+    if (_carregamento) {
+      _carregamento = false;
+    } else {
+      _carregamento = true;
+    }
+    notifyListeners();
+    return _carregamento;
+  }
+
+  trocarEstadoDoErro() {
+    if (_deuError) {
+      _deuError = false;
+    } else {
+      _deuError = true;
+    }
+    notifyListeners();
+    return _deuError;
   }
 }

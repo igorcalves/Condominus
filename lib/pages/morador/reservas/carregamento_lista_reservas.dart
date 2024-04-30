@@ -14,24 +14,28 @@ class ListaDeReservas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: reservaProvider.tamanhoDaLista(),
-        itemBuilder: (context, index) {
-          List<Reserva> reservas = reservaProvider.buscarTodos();
-          Reserva reserva = reservas[index];
-          return ListTile(
-            leading: escolherItemDaReserva(reserva.id!),
-            title: TextoPersonalizado(reserva.nameArea!),
-            subtitle: TextoPersonalizado(
-              reserva.agendamento(),
-              tamanho: 17,
-              opacidade: 0.4,
-            ),
-          );
-        },
-      ),
-    );
+    if (reservaProvider.estaCarregando) {
+      return const Center(child: CircularProgressIndicator());
+    } else {
+      return SizedBox(
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: reservaProvider.tamanhoDaLista(),
+          itemBuilder: (context, index) {
+            List<Reserva> reservas = reservaProvider.buscarTodos();
+            Reserva reserva = reservas[index];
+            return ListTile(
+              leading: escolherItemDaReserva(reserva.id!),
+              title: TextoPersonalizado(reserva.nameArea!),
+              subtitle: TextoPersonalizado(
+                reserva.agendamento(),
+                tamanho: 17,
+                opacidade: 0.4,
+              ),
+            );
+          },
+        ),
+      );
+    }
   }
 }

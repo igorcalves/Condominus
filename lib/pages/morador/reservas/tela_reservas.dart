@@ -28,6 +28,15 @@ class TelaDeReservaDeMoradores extends StatelessWidget {
     ReservaProvider reservaProvider = Provider.of<ReservaProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xff89c5fd),
+            brightness: Brightness.dark,
+          ),
+          textSelectionTheme: TextSelectionThemeData(
+            selectionColor: Colors.white.withOpacity(0.4),
+            selectionHandleColor: Colors.blue,
+          )),
       home: Scaffold(
         extendBodyBehindAppBar: true,
         body: SingleChildScrollView(
@@ -87,6 +96,7 @@ class TelaDeReservaDeMoradores extends StatelessWidget {
                   ),
                   IconePequisa(
                     onPressed: () {
+                      reservaProvider.trocarEstadoCarregamento();
                       reservaProvider.carregarTodos('47776777777');
                     },
                   ),
@@ -121,8 +131,9 @@ class TelaDeReservaDeMoradores extends StatelessWidget {
                 id: id,
                 local: local,
                 botaoDeEnviar: 'Criar',
-                onPressedCriarAtualizar: (Reserva reserva) {
-                  reservaProvider.criarReserva(reserva, cpf);
+                onPressedCriarAtualizar: (Reserva reserva) async {
+                  reservaProvider.trocarEstadoCarregamento();
+                  await reservaProvider.criarReserva(reserva, cpf);
                 },
                 titulo: "Reservas");
           },

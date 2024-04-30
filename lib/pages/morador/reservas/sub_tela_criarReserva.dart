@@ -6,7 +6,10 @@ import 'package:Condominus/dominio/validadores.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'package:Condominus/modelosDoApp/modelos_text_field.dart';
+import 'package:Condominus/pages/morador/reservas/mini_tela_aviso_de_erro.dart';
+import 'package:Condominus/provider/reservar_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SubTelaParaAdicionarReserva extends StatelessWidget {
   SubTelaParaAdicionarReserva(
@@ -25,7 +28,7 @@ class SubTelaParaAdicionarReserva extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final validador = Validar();
 
-  final void Function(Reserva reserva)? onPressedCriarAtualizar;
+  final Function(Reserva reserva)? onPressedCriarAtualizar;
 
   TextEditingController localController = TextEditingController();
   TextEditingController dataDoAgendamentoController = TextEditingController();
@@ -41,6 +44,10 @@ class SubTelaParaAdicionarReserva extends StatelessWidget {
     dataDoAgendamentoController.text = '2024-12-12';
     incioDoAgendamentoController.text = '16:00';
     finalDoAgendamentoController.text = '20:00';
+
+    ReservaProvider reservaProvider = Provider.of<ReservaProvider>(
+      context,
+    );
 
     ///
 
@@ -95,15 +102,17 @@ class SubTelaParaAdicionarReserva extends StatelessWidget {
             const Spacer(),
             TextButton(
               onPressed: () {
+                reservaProvider.trocarEstadoDoErro();
+
                 Navigator.of(context).pop();
               },
               child: const TextoPersonalizado('Cancelar'),
             ),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState!.validate() &&
                     dataDoAgendamentoController.text.isNotEmpty) {
-                  onPressedCriarAtualizar!(Reserva(
+                  await onPressedCriarAtualizar!(Reserva(
                       cpf: '47776777777',
                       areaId: id,
                       startOfScheduling: DateFormatBR.dataParaEnviar(
@@ -112,8 +121,23 @@ class SubTelaParaAdicionarReserva extends StatelessWidget {
                       endOfScheduling: DateFormatBR.dataParaEnviar(
                           dataDoAgendamentoController.text,
                           finalDoAgendamentoController.text)));
-
-                  Navigator.of(context).pop();
+                  if (reservaProvider.deuErro) {
+                    if (context.mounted) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return subDeTelaErro(
+                              textoErro: reservaProvider.msgErro,
+                              context: context);
+                        },
+                      );
+                    }
+                  } else {
+                    reservaProvider.trocarEstadoDoErro();
+                    if (context.mounted) {
+                      Navigator.of(context).pop();
+                    }
+                  }
                 }
               },
               child: TextoPersonalizado(botaoDeEnviar),
