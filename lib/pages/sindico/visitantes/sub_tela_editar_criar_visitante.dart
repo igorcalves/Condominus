@@ -112,14 +112,26 @@ class SubTelaParaAdicionarOuAtualizarVisitantes extends StatelessWidget {
             TextButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  onPressedCriarAtualizar(Visitantes(
-                      name: nomeController.text,
-                      cpf: cpfController.text,
-                      birthDay: DateFormatBR.dateFormatDefault(
-                          dataDeNascimentoController.text),
-                      email: emailController.text,
-                      phone: telefoneController.text,
-                      cpfUser: cpfDoMoradorController.text));
+                  onPressedCriarAtualizar(visitante != null
+                      ? Visitantes(
+                          name: nomeController.text,
+                          cpf: cpfController.text,
+                          birthDay: DateFormatBR.dateFormatDefault(
+                              dataDeNascimentoController.text),
+                          email: emailController.text,
+                          phone: telefoneController.text,
+                          cpfUser: cpfDoMoradorController.text,
+                          registrationDate: visitante!.registrationDate,
+                          user: visitante!.user)
+                      : Visitantes(
+                          name: nomeController.text,
+                          cpf: cpfController.text,
+                          birthDay: DateFormatBR.dateFormatDefault(
+                              dataDeNascimentoController.text),
+                          email: emailController.text,
+                          phone: telefoneController.text,
+                          cpfUser: cpfDoMoradorController.text,
+                        ));
                   Navigator.of(context).pop();
                 }
               },

@@ -1,5 +1,5 @@
 import 'package:Condominus/dominio/entidades/visitantes.dart';
-import 'package:Condominus/repository/interface_repositorio_visitantes.dart';
+import 'package:Condominus/repository/interfaces/interface_repositorio_visitantes.dart';
 import 'package:flutter/material.dart';
 
 class VisitantesProvider with ChangeNotifier {
@@ -40,6 +40,13 @@ class VisitantesProvider with ChangeNotifier {
   criarVisitante(Visitantes visitante) async {
     trocarEstadoCarregamento();
     await _repositorioVisiante.criarVisitante(visitante).then((value) async {
+      await carregarTodos();
+    }).catchError((error) => _chamarErro(error));
+  }
+
+  editarVisitante(Visitantes visitante) async {
+    trocarEstadoCarregamento();
+    await _repositorioVisiante.editarVisitante(visitante).then((value) async {
       await carregarTodos();
     }).catchError((error) => _chamarErro(error));
   }

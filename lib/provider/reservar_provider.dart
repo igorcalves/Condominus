@@ -1,5 +1,5 @@
 import 'package:Condominus/dominio/entidades/reserva.dart';
-import 'package:Condominus/repository/interface_repositorio_reservas.dart';
+import 'package:Condominus/repository/interfaces/interface_repositorio_reservas.dart';
 import 'package:flutter/material.dart';
 
 class ReservaProvider with ChangeNotifier {

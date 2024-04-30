@@ -1,5 +1,5 @@
 import 'package:Condominus/dominio/entidades/user.dart';
-import 'package:Condominus/repository/interface_repositorio_moradores.dart';
+import 'package:Condominus/repository/interfaces/interface_repositorio_moradores.dart';
 import 'package:flutter/material.dart';
 
 class UserProvider with ChangeNotifier {

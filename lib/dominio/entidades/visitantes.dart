@@ -30,7 +30,7 @@ class Visitantes {
     user = User.fromJson(json['user']);
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJsonCreate() {
     return {
       'name': name,
       'cpf': cpf,
@@ -39,6 +39,19 @@ class Visitantes {
       'registrationDate': registrationDate,
       'phone': phone,
       'cpfUser': cpfUser
+    };
+  }
+
+  Map<String, dynamic> toJsonUpdate() {
+    return {
+      'name': name,
+      'cpf': cpf,
+      'birthDay': birthDay,
+      'email': email,
+      'registrationDate': registrationDate,
+      'phone': phone,
+      'cpfUser': cpfUser,
+      'user': user
     };
   }
 

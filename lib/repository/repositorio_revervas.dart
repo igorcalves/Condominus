@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:Condominus/repository/interface_repositorio_reservas.dart';
+import 'package:Condominus/repository/interfaces/interface_repositorio_reservas.dart';
 import 'package:http/http.dart' as http;
 
 class RepositorioDeReservas extends InterfaceRepositorioReserva {

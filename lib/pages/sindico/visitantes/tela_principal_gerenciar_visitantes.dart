@@ -44,14 +44,6 @@ class TelaParaGerenciarVisitantes extends StatelessWidget {
                         builder: (BuildContext alertDialogContext) {
                           return SubTelaParaAdicionarOuAtualizarVisitantes(
                               botaoDeEnviar: 'Criar',
-                              visitante: Visitantes(
-                                  name: 'test da silva',
-                                  cpf: '12345678911',
-                                  birthDay: '1840-12-12',
-                                  phone: '1231232312',
-                                  email: 'test@outmook.com',
-                                  cpfUser: '47776777777',
-                                  user: User(cpf: '47776777777')),
                               onPressedCriarAtualizar:
                                   (Visitantes visitanteParaAdicionar) {
                                 visitantesProvider
@@ -113,7 +105,26 @@ class CorpoDaTelaDeBusca extends StatelessWidget {
                     ),
                   ],
                 ),
-                onPressedIconeEditar: () {},
+                onPressedIconeEditar: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Builder(
+                        builder: (BuildContext alertDialogContext) {
+                          return SubTelaParaAdicionarOuAtualizarVisitantes(
+                              visitante: visitante,
+                              botaoDeEnviar: 'Editar',
+                              onPressedCriarAtualizar:
+                                  (Visitantes visitanteParaeditar) {
+                                visitantesProvider
+                                    .editarVisitante(visitanteParaeditar);
+                              },
+                              titulo: "Atualizar");
+                        },
+                      );
+                    },
+                  );
+                },
                 onPressedIconeDeletar: () {
                   visitantesProvider.trocarEstadoCarregamento();
                   visitantesProvider.deletarVisitante(visitante.cpf!);
