@@ -1,8 +1,8 @@
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:flutter/material.dart';
 
-class TelaPrincipal extends StatelessWidget {
-  const TelaPrincipal({super.key});
+class TelaDeHome extends StatelessWidget {
+  const TelaDeHome({super.key});
 
   @override
   Widget build(BuildContext context) {

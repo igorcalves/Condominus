@@ -1,7 +1,9 @@
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'package:Condominus/pages/morador/reservas/tela_reservas.dart';
+import 'package:Condominus/pages/morador/visitantes/corpo_tela_visitante.dart';
 import 'package:Condominus/pages/morador/visitantes/tela_visitante.dart';
+import 'package:Condominus/pages/sindico/tela_do_logo.dart';
 import 'package:Condominus/pages/sindico/usuarios/tela_princial_gerenciar_usuarios.dart';
 import 'package:Condominus/pages/sindico/visitantes/tela_principal_gerenciar_visitantes.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,8 @@ class TelaPrincipalSindico extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool morador = true;
+
     return MaterialApp(
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
@@ -40,10 +44,12 @@ class TelaPrincipalSindico extends StatelessWidget {
         ),
         body: PageView(
           controller: _pageControlller,
-          children: <Widget>[
-            TelaDeVisitantesPorMorador(),
-            TelaParaGerenciarMoradores(),
-            const TelaParaGerenciarVisitantes()
+          children: [
+            morador ? const TelaDeHome() : TelaDeHome(),
+            morador ? TelaDeReservaDeMoradores() : TelaParaGerenciarMoradores(),
+            morador
+                ? const TelaDeVisitantesPorMorador()
+                : TelaParaGerenciarVisitantes()
           ],
         ),
         extendBody: true,
