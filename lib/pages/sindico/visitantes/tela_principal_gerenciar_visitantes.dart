@@ -89,48 +89,8 @@ class CorpoDaTelaDeBusca extends StatelessWidget {
           itemCount: visitantes.length,
           itemBuilder: ((context, index) {
             var visitante = visitantes[index];
-            return ListTile(
-              title: FrameTile(
-                estaAtivo: true,
-                titulo: AlertaDeDados(
-                  text: visitante.name!,
-                  visitante: visitante,
-                ),
-                subTitulo: Row(
-                  children: [
-                    const Icon(Icons.chevron_right),
-                    AlertaDeDados(
-                      text: visitante.user!.pegarNomeESobrenome(),
-                      user: visitante.user,
-                    ),
-                  ],
-                ),
-                onPressedIconeEditar: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Builder(
-                        builder: (BuildContext alertDialogContext) {
-                          return SubTelaParaAdicionarOuAtualizarVisitantes(
-                              visitante: visitante,
-                              botaoDeEnviar: 'Editar',
-                              onPressedCriarAtualizar:
-                                  (Visitantes visitanteParaeditar) {
-                                visitantesProvider
-                                    .editarVisitante(visitanteParaeditar);
-                              },
-                              titulo: "Atualizar");
-                        },
-                      );
-                    },
-                  );
-                },
-                onPressedIconeDeletar: () {
-                  visitantesProvider.trocarEstadoCarregamento();
-                  visitantesProvider.deletarVisitante(visitante.cpf!);
-                },
-              ),
-            );
+            return TileDeVisitante(
+                visitante: visitante, visitantesProvider: visitantesProvider);
           }));
     }
   }

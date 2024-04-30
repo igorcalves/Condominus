@@ -8,9 +8,7 @@ class CampoDeBusca extends StatelessWidget {
   final void Function(String searchText)? onPressedPesquisa;
 
   CampoDeBusca(
-      {super.key,
-      required this.onPressedAdicionar,
-      required this.onPressedPesquisa});
+      {super.key, this.onPressedAdicionar, required this.onPressedPesquisa});
 
   final TextEditingController textFieldController = TextEditingController();
 
@@ -37,9 +35,10 @@ class CampoDeBusca extends StatelessWidget {
           suffixIcon: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              IconeDeAdicionar(
-                onPressed: onPressedAdicionar,
-              ),
+              if (onPressedAdicionar != null)
+                IconeDeAdicionar(
+                  onPressed: onPressedAdicionar,
+                ),
               IconePequisa(
                   onPressed: () =>
                       {onPressedPesquisa!(textFieldController.text)})
