@@ -1,7 +1,6 @@
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'package:Condominus/pages/morador/reservas/tela_reservas.dart';
-import 'package:Condominus/pages/morador/visitantes/corpo_tela_visitante.dart';
 import 'package:Condominus/pages/morador/visitantes/tela_visitante.dart';
 import 'package:Condominus/pages/sindico/tela_do_logo.dart';
 import 'package:Condominus/pages/sindico/usuarios/tela_princial_gerenciar_usuarios.dart';
