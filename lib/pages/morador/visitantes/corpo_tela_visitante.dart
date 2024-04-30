@@ -3,7 +3,6 @@ import 'package:Condominus/dominio/entidades/visitantes.dart';
 import 'package:Condominus/dominio/formatadores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'package:Condominus/pages/sindico/usuarios/abrir_info_usuarios.dart';
-import 'package:Condominus/provider/morador_provider.dart';
 import 'package:Condominus/provider/visitante_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
