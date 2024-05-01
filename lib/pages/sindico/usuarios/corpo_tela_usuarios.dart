@@ -17,7 +17,10 @@ class CorpoDaTelaDeGerenciarUsuario extends StatelessWidget {
     var users = usersProvider.buscarTodos();
 
     if (usersProvider.estaCarregando) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(
+          child: CircularProgressIndicator(
+        color: Colors.white,
+      ));
     } else if (usersProvider.deuErro) {
       return TextoPersonalizado(usersProvider.msgErro);
     } else if (users != null) {
@@ -49,7 +52,7 @@ class CorpoDaTelaDeGerenciarUsuario extends StatelessWidget {
         },
       );
     } else {
-      return const Text('Nenhum Usuario Encontrado!');
+      return const TextoPersonalizado('Nenhum Usuario Encontrado');
     }
   }
 

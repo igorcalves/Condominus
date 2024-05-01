@@ -15,54 +15,41 @@ class TelaParaGerenciarMoradores extends StatelessWidget {
   Widget build(BuildContext context) {
     UserProvider usersProvider =
         Provider.of<UserProvider>(context, listen: false);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xff89c5fd),
-            brightness: Brightness.dark,
-          ),
-          textSelectionTheme: TextSelectionThemeData(
-            selectionColor: Colors.white.withOpacity(0.4),
-            selectionHandleColor: Colors.blue,
-          )),
-      home: Scaffold(
-        body: Container(
-          decoration: Cores.gradientePrincipal(),
-          child: Column(
-            children: [
-              CampoDeBusca(
-                onPressedAdicionar: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Builder(
-                        builder: (BuildContext alertDialogContext) {
-                          return SubTelaParaAdicionarOuAtualizar(
-                              botaoDeEnviar: 'Criar',
-                              onPressedCriarAtualizar: (User user) {
-                                usersProvider.trocarEstadoCarregamento();
-                                usersProvider.criarUsuario(user);
-                              },
-                              titulo: "Registro");
-                        },
-                      );
-                    },
-                  );
-                },
-                onPressedPesquisa: (String textoDeBusca) {
-                  final UserProvider users =
-                      Provider.of(context, listen: false);
-                  users.escolherTipoDeBusca(textoDeBusca);
-                  users.trocarEstadoCarregamento();
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Expanded(child: CorpoDaTelaDeGerenciarUsuario()),
-            ],
-          ),
+    return Scaffold(
+      body: Container(
+        decoration: Cores.gradientePrincipal(),
+        child: Column(
+          children: [
+            CampoDeBusca(
+              onPressedAdicionar: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Builder(
+                      builder: (BuildContext alertDialogContext) {
+                        return SubTelaParaAdicionarOuAtualizar(
+                            botaoDeEnviar: 'Criar',
+                            onPressedCriarAtualizar: (User user) {
+                              usersProvider.trocarEstadoCarregamento();
+                              usersProvider.criarUsuario(user);
+                            },
+                            titulo: "Registro");
+                      },
+                    );
+                  },
+                );
+              },
+              onPressedPesquisa: (String textoDeBusca) {
+                final UserProvider users = Provider.of(context, listen: false);
+                users.escolherTipoDeBusca(textoDeBusca);
+                users.trocarEstadoCarregamento();
+              },
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Expanded(child: CorpoDaTelaDeGerenciarUsuario()),
+          ],
         ),
       ),
     );

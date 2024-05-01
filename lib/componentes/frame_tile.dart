@@ -27,7 +27,7 @@ class FrameTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: const CircleAvatar(child: Icon(Icons.person)),
+      leading: iconeDePerfil(),
       title: titulo,
       subtitle: subTitulo,
       trailing: Row(
@@ -107,7 +107,10 @@ class TileDeVisitante extends StatelessWidget {
         ),
         subTitulo: Row(
           children: [
-            const Icon(Icons.chevron_right),
+            const Icon(
+              Icons.chevron_right,
+              color: Colors.white,
+            ),
             AlertaDeDados(
               text: visitante.user!.pegarNomeESobrenome(),
               user: visitante.user,

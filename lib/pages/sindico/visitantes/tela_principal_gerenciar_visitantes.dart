@@ -20,51 +20,39 @@ class TelaParaGerenciarVisitantes extends StatelessWidget {
     VisitantesProvider visitantesProvider =
         Provider.of<VisitantesProvider>(context, listen: false);
 
-    return MaterialApp(
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xff89c5fd),
-            brightness: Brightness.dark,
-          ),
-          textSelectionTheme: TextSelectionThemeData(
-            selectionColor: Colors.white.withOpacity(0.4),
-            selectionHandleColor: Colors.blue,
+    return Scaffold(
+      body: Container(
+          decoration: Cores.gradientePrincipal(),
+          child: Column(
+            children: [
+              CampoDeBusca(onPressedAdicionar: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Builder(
+                      builder: (BuildContext alertDialogContext) {
+                        return SubTelaParaAdicionarOuAtualizarVisitantes(
+                            botaoDeEnviar: 'Criar',
+                            onPressedCriarAtualizar:
+                                (Visitantes visitanteParaAdicionar) {
+                              visitantesProvider
+                                  .criarVisitante(visitanteParaAdicionar);
+                            },
+                            titulo: "Registro");
+                      },
+                    );
+                  },
+                );
+              }, onPressedPesquisa: (String text) {
+                visitantesProvider.escolherTipoDeBusca(text);
+                visitantesProvider.trocarEstadoCarregamento();
+              }),
+              const SizedBox(
+                height: 20,
+              ),
+              const Expanded(child: CorpoDaTelaDeBusca()),
+            ],
           )),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Container(
-            decoration: Cores.gradientePrincipal(),
-            child: Column(
-              children: [
-                CampoDeBusca(onPressedAdicionar: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Builder(
-                        builder: (BuildContext alertDialogContext) {
-                          return SubTelaParaAdicionarOuAtualizarVisitantes(
-                              botaoDeEnviar: 'Criar',
-                              onPressedCriarAtualizar:
-                                  (Visitantes visitanteParaAdicionar) {
-                                visitantesProvider
-                                    .criarVisitante(visitanteParaAdicionar);
-                              },
-                              titulo: "Registro");
-                        },
-                      );
-                    },
-                  );
-                }, onPressedPesquisa: (String text) {
-                  visitantesProvider.escolherTipoDeBusca(text);
-                  visitantesProvider.trocarEstadoCarregamento();
-                }),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Expanded(child: CorpoDaTelaDeBusca()),
-              ],
-            )),
-      ),
     );
   }
 }

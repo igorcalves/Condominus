@@ -91,6 +91,14 @@ Icon iconeChurrassqueira() {
       color: Cores.corDoTextoPrincipal(), size: 27);
 }
 
+CircleAvatar iconeDePerfil() {
+  return const CircleAvatar(
+    backgroundColor: Colors.white,
+    foregroundColor: Colors.blue,
+    child: Icon(Icons.person),
+  );
+}
+
 class IconeDeAdicionar extends StatelessWidget {
   final VoidCallback? onPressed;
 

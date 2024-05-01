@@ -1,3 +1,4 @@
+import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'package:Condominus/pages/morador/reservas/tela_reservas.dart';
@@ -6,12 +7,13 @@ import 'package:Condominus/pages/sindico/tela_do_logo.dart';
 import 'package:Condominus/pages/sindico/usuarios/tela_princial_gerenciar_usuarios.dart';
 import 'package:Condominus/pages/sindico/visitantes/tela_principal_gerenciar_visitantes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar_item.dart';
 
 class TelaPrincipalSindico extends StatelessWidget {
-  TelaPrincipalSindico({super.key});
+  TelaPrincipalSindico({super.key, required this.user});
+
+  final User user;
 
   final _pageControlller = PageController();
 
@@ -21,76 +23,62 @@ class TelaPrincipalSindico extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool morador = true;
+    late bool morador;
+    if (user.role == 'USER') {
+      morador = false;
+    } else if (user.role == 'ADM') {
+      morador = true;
+    }
 
-    return MaterialApp(
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
-      ],
-      supportedLocales: const [Locale('pt')],
-      theme: ThemeData(
-        textSelectionTheme: const TextSelectionThemeData(
-          selectionHandleColor: Colors.blue,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: TileUsuarioAppBar(
+          user: user,
         ),
+        flexibleSpace: Container(decoration: Cores.gradienteAppBar()),
       ),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          title: const TileUsuarioAppBar(),
-          flexibleSpace: Container(decoration: Cores.gradienteAppBar()),
-        ),
-        body: PageView(
-          controller: _pageControlller,
-          children: [
-            morador ? const TelaDeHome() : TelaDeHome(),
-            morador ? TelaDeReservaDeMoradores() : TelaParaGerenciarMoradores(),
-            morador
-                ? const TelaDeVisitantesPorMorador()
-                : TelaParaGerenciarVisitantes()
-          ],
-        ),
-        extendBody: true,
-        bottomNavigationBar: RollingBottomBar(
-          color: const Color.fromARGB(255, 255, 240, 219),
-          controller: _pageControlller,
-          flat: true,
-          useActiveColorByDefault: false,
-          items: const [
-            RollingBottomBarItem(Icons.home, activeColor: Colors.blue),
-            RollingBottomBarItem(Icons.person, activeColor: Colors.blueAccent),
-            RollingBottomBarItem(Icons.groups, activeColor: Colors.blue),
-          ],
-          enableIconRotation: true,
-          onTap: (index) {
-            _pageControlller.animateToPage(
-              index,
-              duration: const Duration(milliseconds: 400),
-              curve: Curves.easeOut,
-            );
-          },
-        ),
+      body: PageView(
+        controller: _pageControlller,
+        children: [
+          morador ? const TelaDeHome() : TelaDeHome(),
+          morador ? TelaDeReservaDeMoradores() : TelaParaGerenciarMoradores(),
+          morador
+              ? const TelaDeVisitantesPorMorador()
+              : TelaParaGerenciarVisitantes()
+        ],
+      ),
+      extendBody: true,
+      bottomNavigationBar: RollingBottomBar(
+        color: const Color.fromARGB(255, 255, 240, 219),
+        controller: _pageControlller,
+        flat: true,
+        useActiveColorByDefault: false,
+        items: const [
+          RollingBottomBarItem(Icons.home, activeColor: Colors.blue),
+          RollingBottomBarItem(Icons.person, activeColor: Colors.blueAccent),
+          RollingBottomBarItem(Icons.groups, activeColor: Colors.blue),
+        ],
+        enableIconRotation: true,
+        onTap: (index) {
+          _pageControlller.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 400),
+            curve: Curves.easeOut,
+          );
+        },
       ),
     );
   }
 }
 
 class TileUsuarioAppBar extends StatelessWidget {
-  const TileUsuarioAppBar({super.key});
-
+  const TileUsuarioAppBar({super.key, required this.user});
+  final User user;
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
-        IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.account_circle,
-              size: 40,
-            )),
-        const TextoPersonalizado('Nome Sindico')
-      ],
+      children: [TextoPersonalizado(user.name!)],
     );
   }
 }

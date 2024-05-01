@@ -45,16 +45,16 @@ class UserProvider with ChangeNotifier {
     }
     if (data.isNotEmpty) {
       if (apenasNumeros) {
-        _buscarUsuariosPorCpf(data);
+        await _buscarUsuariosPorCpf(data);
       } else {
-        _buscarUsuariosPorNome(data);
+        await _buscarUsuariosPorNome(data);
       }
     } else {
       carregarTodos();
     }
   }
 
-  void _buscarUsuariosPorCpf(String cpf) async {
+  _buscarUsuariosPorCpf(String cpf) async {
     await _repositorio.buscarMoradorPorCpf(cpf).then((value) {
       users.add(User.fromJson(value));
       _deuError = false;
@@ -74,7 +74,7 @@ class UserProvider with ChangeNotifier {
     }).catchError((error) => _chamarErro(error));
   }
 
-  void _buscarUsuariosPorNome(String nome) async {
+  _buscarUsuariosPorNome(String nome) async {
     await _repositorio.buscarMoradorPorNome(nome).then((value) {
       users = User.fromJsonList(value);
       _deuError = false;
@@ -108,6 +108,11 @@ class UserProvider with ChangeNotifier {
 
   String get msgErro {
     return _msgError;
+  }
+
+  zerarLista() {
+    users = [];
+    trocarEstadoCarregamento();
   }
 
   trocarEstadoCarregamento() {
