@@ -1,5 +1,6 @@
 import 'package:Condominus/componentes/frame_superior_busca.dart';
 import 'package:Condominus/dominio/entidades/reserva.dart';
+import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/pages/morador/reservas/carregamento_lista_reservas.dart';
 import 'package:Condominus/pages/morador/reservas/sub_tela_criarReserva.dart';
 import 'package:Condominus/provider/reservar_provider.dart';
@@ -11,9 +12,10 @@ import 'package:Condominus/modelosDoApp/modelo_texto.dart';
 import 'package:provider/provider.dart';
 
 class TelaDeReservaDeMoradores extends StatelessWidget {
-  TelaDeReservaDeMoradores({Key? key});
+  TelaDeReservaDeMoradores({Key? key, required this.user});
 
-  String cpf = '47776777777';
+  final User user;
+
   Map<String, int> areas = {
     'Churrasqueira': 0,
     'Piscina': 1,
@@ -80,7 +82,7 @@ class TelaDeReservaDeMoradores extends StatelessWidget {
                                 context: context,
                                 reservaProvider: reservaProvider,
                                 local: chaves[index],
-                                cpf: cpf,
+                                cpf: user.cpf!,
                                 id: valores[index].toString());
                           },
                         );
@@ -97,7 +99,7 @@ class TelaDeReservaDeMoradores extends StatelessWidget {
                   IconePequisa(
                     onPressed: () {
                       reservaProvider.trocarEstadoCarregamento();
-                      reservaProvider.carregarTodos('47776777777');
+                      reservaProvider.carregarTodos(user.cpf!);
                     },
                   ),
                   SizedBox(
@@ -129,6 +131,7 @@ class TelaDeReservaDeMoradores extends StatelessWidget {
           builder: (BuildContext alertDialogContext) {
             return SubTelaParaAdicionarReserva(
                 id: id,
+                cpf: cpf,
                 local: local,
                 botaoDeEnviar: 'Criar',
                 onPressedCriarAtualizar: (Reserva reserva) async {

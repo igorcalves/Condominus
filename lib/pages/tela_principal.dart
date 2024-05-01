@@ -42,9 +42,11 @@ class TelaPrincipalSindico extends StatelessWidget {
         controller: _pageControlller,
         children: [
           morador ? const TelaDeHome() : TelaDeHome(),
-          morador ? TelaDeReservaDeMoradores() : TelaParaGerenciarMoradores(),
           morador
-              ? const TelaDeVisitantesPorMorador()
+              ? TelaDeReservaDeMoradores(user: user)
+              : TelaParaGerenciarMoradores(),
+          morador
+              ? TelaDeVisitantesPorMorador(user: user)
               : TelaParaGerenciarVisitantes()
         ],
       ),

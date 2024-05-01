@@ -1,4 +1,5 @@
 import 'package:Condominus/componentes/frame_superior_busca.dart';
+import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/pages/morador/visitantes/corpo_tela_visitante.dart';
 import 'package:Condominus/provider/visitante_provider.dart';
@@ -6,8 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TelaDeVisitantesPorMorador extends StatelessWidget {
-  const TelaDeVisitantesPorMorador({super.key});
+  const TelaDeVisitantesPorMorador({super.key, required this.user});
 
+  final User user;
   @override
   Widget build(BuildContext context) {
     VisitantesProvider visitantesProvider =
@@ -33,7 +35,7 @@ class TelaDeVisitantesPorMorador extends StatelessWidget {
             children: [
               CampoDeBusca(onPressedPesquisa: (String texto) {
                 visitantesProvider.trocarEstadoCarregamento();
-                visitantesProvider.escolherTipoDeBusca('47776777777');
+                visitantesProvider.escolherTipoDeBusca(user.cpf!);
               }),
               const SizedBox(
                 height: 20,

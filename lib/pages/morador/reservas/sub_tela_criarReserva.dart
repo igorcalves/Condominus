@@ -11,6 +11,7 @@ import 'package:Condominus/provider/reservar_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class SubTelaParaAdicionarReserva extends StatelessWidget {
   SubTelaParaAdicionarReserva(
       {super.key,
@@ -18,12 +19,14 @@ class SubTelaParaAdicionarReserva extends StatelessWidget {
       required this.onPressedCriarAtualizar,
       required this.botaoDeEnviar,
       required this.local,
-      required this.id});
+      required this.id,
+      required this.cpf});
 
   final String botaoDeEnviar;
   final String titulo;
   final String local;
   final String id;
+  final String cpf;
 
   final _formKey = GlobalKey<FormState>();
   final validador = Validar();
@@ -113,7 +116,7 @@ class SubTelaParaAdicionarReserva extends StatelessWidget {
                 if (_formKey.currentState!.validate() &&
                     dataDoAgendamentoController.text.isNotEmpty) {
                   await onPressedCriarAtualizar!(Reserva(
-                      cpf: '47776777777',
+                      cpf: cpf,
                       areaId: id,
                       startOfScheduling: DateFormatBR.dataParaEnviar(
                           dataDoAgendamentoController.text,
