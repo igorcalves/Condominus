@@ -16,7 +16,7 @@ class TelaDeLogin extends StatelessWidget {
         child: Center(
           child: ElevatedButton(
             onPressed: () async {
-              await usersProvider.escolherTipoDeBusca('47776777777');
+              await usersProvider.escolherTipoDeBusca('45681326497');
               var usuario = usersProvider.buscarTodos();
               usersProvider.zerarLista();
               if (context.mounted) {
