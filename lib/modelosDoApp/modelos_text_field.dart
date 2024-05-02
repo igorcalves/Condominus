@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 
-TextStyle estiloDoTexto() {
-  return TextStyle(color: Cores.corDoTextoPrincipal());
+TextStyle estiloDoTexto({double tamanho = 17}) {
+  return TextStyle(color: Cores.corDoTextoPrincipal(), fontSize: tamanho);
 }
 
 TextStyle estiloDoTextoDeErro() {
@@ -12,6 +12,7 @@ TextStyle estiloDoTextoDeErro() {
 }
 
 TextFormField campoDeTextoCadastro({
+  double tamanhoFonte = 18,
   required TextEditingController controller,
   required bool Function(String text) validacao,
   required String campo,
@@ -22,7 +23,7 @@ TextFormField campoDeTextoCadastro({
   return TextFormField(
     keyboardType: teclado,
     readOnly: somenteVisualizacao,
-    style: estiloDoTexto(),
+    style: estiloDoTexto(tamanho: tamanhoFonte),
     cursorColor: Colors.white,
     controller: controller,
     enableSuggestions: false,

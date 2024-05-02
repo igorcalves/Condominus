@@ -1,5 +1,4 @@
 import 'package:Condominus/pages/login/tela_principal_login.dart';
-import 'package:Condominus/pages/tela_principal.dart';
 import 'package:Condominus/provider/morador_provider.dart';
 import 'package:Condominus/provider/reservar_provider.dart';
 import 'package:Condominus/provider/visitante_provider.dart';
@@ -49,7 +48,7 @@ void main() {
                 selectionHandleColor: Colors.blue,
               )),
           debugShowCheckedModeBanner: false,
-          home: const TelaDeLogin())));
+          home: TelaDeLogin())));
 
   //runApp(AppWidget());
 }
