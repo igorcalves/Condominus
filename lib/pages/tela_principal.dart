@@ -1,6 +1,7 @@
 import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
+import 'package:Condominus/pages/morador/noticias/tela_principal_noticias.dart';
 import 'package:Condominus/pages/morador/reservas/tela_reservas.dart';
 import 'package:Condominus/pages/morador/visitantes/tela_visitante.dart';
 import 'package:Condominus/pages/sindico/tela_do_logo.dart';
@@ -24,11 +25,13 @@ class TelaPrincipalSindico extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     late bool morador;
+
     if (user.role == 'USER') {
-      morador = false;
-    } else if (user.role == 'ADM') {
       morador = true;
+    } else if (user.role == 'ADM') {
+      morador = false;
     }
+    print(user.role);
 
     return Scaffold(
       appBar: AppBar(
@@ -41,13 +44,13 @@ class TelaPrincipalSindico extends StatelessWidget {
       body: PageView(
         controller: _pageControlller,
         children: [
-          morador ? const TelaDeHome() : TelaDeHome(),
+          morador ? const TelaDeNoticias() : const TelaDeHome(),
           morador
               ? TelaDeReservaDeMoradores(user: user)
               : TelaParaGerenciarMoradores(),
           morador
               ? TelaDeVisitantesPorMorador(user: user)
-              : TelaParaGerenciarVisitantes()
+              : const TelaParaGerenciarVisitantes()
         ],
       ),
       extendBody: true,
@@ -56,10 +59,11 @@ class TelaPrincipalSindico extends StatelessWidget {
         controller: _pageControlller,
         flat: true,
         useActiveColorByDefault: false,
-        items: const [
-          RollingBottomBarItem(Icons.home, activeColor: Colors.blue),
-          RollingBottomBarItem(Icons.person, activeColor: Colors.blueAccent),
-          RollingBottomBarItem(Icons.groups, activeColor: Colors.blue),
+        items: [
+          const RollingBottomBarItem(Icons.home, activeColor: Colors.blue),
+          RollingBottomBarItem(morador ? Icons.edit_calendar : Icons.person,
+              activeColor: Colors.blueAccent),
+          const RollingBottomBarItem(Icons.groups, activeColor: Colors.blue),
         ],
         enableIconRotation: true,
         onTap: (index) {
