@@ -31,7 +31,8 @@ class TelaParaGerenciarMoradores extends StatelessWidget {
                             botaoDeEnviar: 'Criar',
                             onPressedCriarAtualizar: (User user) {
                               usersProvider.trocarEstadoCarregamento();
-                              usersProvider.criarUsuario(user);
+                              usersProvider.criarUsuario(
+                                  user, usersProvider.getUser().token);
                             },
                             titulo: "Registro");
                       },
@@ -39,10 +40,11 @@ class TelaParaGerenciarMoradores extends StatelessWidget {
                   },
                 );
               },
-              onPressedPesquisa: (String textoDeBusca) {
+              onPressedPesquisa: (String textoDeBusca) async {
                 final UserProvider users = Provider.of(context, listen: false);
-                users.escolherTipoDeBusca(textoDeBusca);
-                users.trocarEstadoCarregamento();
+
+                await users.escolherTipoDeBusca(
+                    textoDeBusca, users.getUser().token);
               },
             ),
             const SizedBox(

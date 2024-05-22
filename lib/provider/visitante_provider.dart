@@ -16,7 +16,7 @@ class VisitantesProvider with ChangeNotifier {
     return [...visitantes];
   }
 
-  escolherTipoDeBusca(String data) async {
+  escolherTipoDeBusca(String data, token) async {
     visitantes = [];
 
     bool apenasNumeros = true;
@@ -28,32 +28,36 @@ class VisitantesProvider with ChangeNotifier {
     }
     if (data.isNotEmpty) {
       if (apenasNumeros) {
-        _buscarVisitantesProCpfDoMorador(data);
+        _buscarVisitantesProCpfDoMorador(data, token);
       } else {
-        _buscarVisitantesPorNome(data);
+        _buscarVisitantesPorNome(data, token);
       }
     } else {
-      carregarTodos();
+      carregarTodos(token);
     }
   }
 
-  criarVisitante(Visitantes visitante) async {
+  criarVisitante(Visitantes visitante, token) async {
     trocarEstadoCarregamento();
-    await _repositorioVisiante.criarVisitante(visitante).then((value) async {
-      await carregarTodos();
-    }).catchError((error) => _chamarErro(error));
-  }
-
-  editarVisitante(Visitantes visitante) async {
-    trocarEstadoCarregamento();
-    await _repositorioVisiante.editarVisitante(visitante).then((value) async {
-      await carregarTodos();
-    }).catchError((error) => _chamarErro(error));
-  }
-
-  _buscarVisitantesProCpfDoMorador(String cpfUser) async {
     await _repositorioVisiante
-        .buscarVisitantePorCpfDoMorador(cpfUser)
+        .criarVisitante(visitante, token)
+        .then((value) async {
+      await carregarTodos(token);
+    }).catchError((error) => _chamarErro(error));
+  }
+
+  editarVisitante(Visitantes visitante, token) async {
+    trocarEstadoCarregamento();
+    await _repositorioVisiante
+        .editarVisitante(visitante, token)
+        .then((value) async {
+      await carregarTodos(token);
+    }).catchError((error) => _chamarErro(error));
+  }
+
+  _buscarVisitantesProCpfDoMorador(String cpfUser, token) async {
+    await _repositorioVisiante
+        .buscarVisitantePorCpfDoMorador(cpfUser, token)
         .then((value) {
       visitantes = Visitantes.fromJsonList(value);
       _deuError = false;
@@ -61,25 +65,27 @@ class VisitantesProvider with ChangeNotifier {
     }).catchError((error) => _chamarErro(error));
   }
 
-  _buscarVisitantesPorNome(String nome) async {
-    await _repositorioVisiante.buscarVisitantePorNome(nome).then((value) {
-      visitantes = Visitantes.fromJsonList(value);
-      _deuError = false;
-      trocarEstadoCarregamento();
-    }).catchError((error) => _chamarErro(error));
-  }
-
-  carregarTodos() async {
-    await _repositorioVisiante.buscarVisitantePorNome('').then((value) {
-      visitantes = Visitantes.fromJsonList(value);
-      _deuError = false;
-      trocarEstadoCarregamento();
-    }).catchError((error) => _chamarErro(error));
-  }
-
-  deletarVisitante(String cpf) async {
+  _buscarVisitantesPorNome(String nome, token) async {
     await _repositorioVisiante
-        .deletarVisitante(cpf)
+        .buscarVisitantePorNome(nome, token)
+        .then((value) {
+      visitantes = Visitantes.fromJsonList(value);
+      _deuError = false;
+      trocarEstadoCarregamento();
+    }).catchError((error) => _chamarErro(error));
+  }
+
+  carregarTodos(token) async {
+    await _repositorioVisiante.buscarVisitantePorNome('', token).then((value) {
+      visitantes = Visitantes.fromJsonList(value);
+      _deuError = false;
+      trocarEstadoCarregamento();
+    }).catchError((error) => _chamarErro(error));
+  }
+
+  deletarVisitante(String cpf, token) async {
+    await _repositorioVisiante
+        .deletarVisitante(cpf, token)
         .then((value) async {})
         .catchError((error) => _chamarErro(error));
   }

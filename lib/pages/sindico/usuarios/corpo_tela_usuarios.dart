@@ -13,7 +13,6 @@ class CorpoDaTelaDeGerenciarUsuario extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider usersProvider = Provider.of<UserProvider>(context);
-
     var users = usersProvider.buscarTodos();
 
     if (usersProvider.estaCarregando) {
@@ -41,10 +40,12 @@ class CorpoDaTelaDeGerenciarUsuario extends StatelessWidget {
                 _funcionalidadeDoBotaoEditar(context, users, index);
               },
               onPressedIconeDeletar: () {
-                usersProvider.deletarUsuario(users[index].cpf!);
+                usersProvider.deletarUsuario(
+                    users[index].cpf!, usersProvider.getUser().token);
               },
               onPressedIconeReverter: () {
-                usersProvider.ativarUsuario(users[index].cpf!);
+                usersProvider.ativarUsuario(
+                    users[index].cpf!, usersProvider.getUser().token);
               },
               estaAtivo: users[index].enable!,
             ),
@@ -70,7 +71,8 @@ class CorpoDaTelaDeGerenciarUsuario extends StatelessWidget {
                 botaoDeEnviar: 'Atualizar',
                 onPressedCriarAtualizar: (User user) {
                   usersProvider.trocarEstadoCarregamento();
-                  usersProvider.atualizarUsuario(user);
+                  usersProvider.atualizarUsuario(
+                      user, usersProvider.getUser().token);
                 },
                 titulo: "Atualizar Cadastro",
                 user: users[index]);

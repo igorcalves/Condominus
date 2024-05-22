@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 
 class User {
   String? name;
+  String? login;
   String? cpf;
   String? phone;
   String? role;
@@ -10,9 +11,12 @@ class User {
   String? birthDay;
   double? condominiumPrice;
   String? apartmentNumber;
+  String? token;
   bool? enable;
+
   User({
     this.name,
+    this.login,
     this.cpf,
     this.phone,
     this.role,
@@ -22,11 +26,13 @@ class User {
     this.condominiumPrice,
     this.apartmentNumber,
     this.enable = true,
+    this.token,
   });
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
+    data['login'] = login;
     data['cpf'] = cpf;
     data['phone'] = phone;
     data['role'] = role;
@@ -41,6 +47,7 @@ class User {
 
   User.fromJson(Map<String, dynamic> json) {
     name = json['name'];
+    login = json['login'];
     cpf = json['cpf'];
     phone = json['phone'];
     role = json['role'];
@@ -49,6 +56,7 @@ class User {
     birthDay = json['birthDay'];
     condominiumPrice = json['condominiumPrice'];
     apartmentNumber = json['apartmentNumber'];
+    token = json['token'];
     enable = json['enabled'];
   }
 
@@ -58,7 +66,7 @@ class User {
 
   @override
   String toString() {
-    return 'CPF: $cpf\nPhone: $phone\nTipo de usuario : ${role == 'ADM' ? 'Sindíco' : 'Morador'}\nEmail: $email '
+    return 'Login: $login\nCPF: $cpf\nPhone: $phone\nTipo de usuario : ${role == 'ADM' ? 'Sindíco' : 'Morador'}\nEmail: $email '
         '\nData de Nascimento: ${dateFormat(birthDay!)}\nPreço do condominio: $condominiumPrice\n'
         'numero do apartamento: $apartmentNumber\nstatus: ${enable! ? 'Ativado' : 'Desativado'}';
   }

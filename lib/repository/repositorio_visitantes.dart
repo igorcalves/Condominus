@@ -8,11 +8,14 @@ class RepositorioVisitantes extends InterfaceRepositorioVisiante {
 
   RepositorioVisitantes(this._uri);
 
-  buscadorGenerico(String path, String recursoDeBusca) async {
+  buscadorGenerico(String path, String recursoDeBusca, token) async {
     http.Response response;
     try {
       var url = Uri.parse(_uri + path + recursoDeBusca);
-      response = await http.get(url).timeout(const Duration(seconds: 2));
+      response = await http.get(url, headers: {
+        "Content-Type": "application/json",
+        "Authorization": 'Bearer $token'
+      });
     } catch (e) {
       throw Exception('Servidor Offiline');
     }
@@ -26,21 +29,26 @@ class RepositorioVisitantes extends InterfaceRepositorioVisiante {
   }
 
   @override
-  Future<List> buscarVisitantePorCpfDoMorador(String cpfDoMorador) async {
-    return await buscadorGenerico('/users/visitors/cpfuser?cpf=', cpfDoMorador);
+  Future<List> buscarVisitantePorCpfDoMorador(
+      String cpfDoMorador, token) async {
+    return await buscadorGenerico(
+        '/users/visitors/cpfuser?cpf=', cpfDoMorador, token);
   }
 
   @override
-  Future<List<dynamic>> buscarVisitantePorNome(String nome) async {
-    return await buscadorGenerico('/users/visitors/name?name=', nome);
+  Future<List<dynamic>> buscarVisitantePorNome(String nome, token) async {
+    return await buscadorGenerico('/users/visitors/name?name=', nome, token);
   }
 
   @override
-  Future deletarVisitante(String cpf) async {
+  Future deletarVisitante(String cpf, token) async {
     http.Response response;
     try {
       var url = Uri.parse('$_uri/users/visitors?cpf=$cpf');
-      response = await http.delete(url).timeout(const Duration(seconds: 2));
+      response = await http.delete(url, headers: {
+        "Content-Type": "application/json",
+        "Authorization": 'Bearer $token'
+      });
     } catch (e) {
       throw Exception('Servidor Offiline');
     }
@@ -54,14 +62,16 @@ class RepositorioVisitantes extends InterfaceRepositorioVisiante {
   }
 
   @override
-  Future criarVisitante(visitante) async {
+  Future criarVisitante(visitante, token) async {
     http.Response response;
     try {
       var url = Uri.parse('$_uri/users/visitors');
-      response = await http
-          .post(url, body: jsonEncode(visitante.toJsonCreate()), headers: {
-        "Content-Type": "application/json",
-      });
+      response = await http.post(url,
+          body: jsonEncode(visitante.toJsonCreate()),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": 'Bearer $token'
+          });
     } catch (e) {
       throw Exception('Servidor Offline');
     }
@@ -80,14 +90,16 @@ class RepositorioVisitantes extends InterfaceRepositorioVisiante {
   }
 
   @override
-  Future editarVisitante(visitante) async {
+  Future editarVisitante(visitante, token) async {
     http.Response response;
     try {
       var url = Uri.parse('$_uri/users/visitors');
-      response = await http
-          .put(url, body: jsonEncode(visitante.toJsonUpdate()), headers: {
-        "Content-Type": "application/json",
-      });
+      response = await http.put(url,
+          body: jsonEncode(visitante.toJsonUpdate()),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": 'Bearer $token'
+          });
     } catch (e) {
       throw Exception('Servidor Offline');
     }

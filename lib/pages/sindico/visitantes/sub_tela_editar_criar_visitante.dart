@@ -70,6 +70,7 @@ class SubTelaParaAdicionarOuAtualizarVisitantes extends StatelessWidget {
                         textoErro: 'nome invalido'),
                     campoDeTextoCadastro(
                         campo: 'Cpf',
+                        somenteVisualizacao: visitante != null ? true : false,
                         controller: cpfController,
                         validacao: (text) => validador.cpfValido(text),
                         textoErro: 'cpf invalido'),

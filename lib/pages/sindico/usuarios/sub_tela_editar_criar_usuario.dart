@@ -30,7 +30,7 @@ class SubTelaParaAdicionarOuAtualizar extends StatelessWidget {
   TextEditingController telefoneController = TextEditingController();
   TextEditingController roleController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController senhaController = TextEditingController();
+  TextEditingController loginController = TextEditingController();
 
   TextEditingController dataDeNascimentoController = TextEditingController();
   TextEditingController condominiumPriceController = TextEditingController();
@@ -44,7 +44,7 @@ class SubTelaParaAdicionarOuAtualizar extends StatelessWidget {
       telefoneController.text = user!.phone!;
       roleController.text = user!.role!;
       emailController.text = user!.email!;
-      senhaController.text = user!.senha!;
+      loginController.text = user!.login!;
       dataDeNascimentoController.text =
           DateFormatBR.dateFormat(user!.birthDay!);
       condominiumPriceController.text = user!.condominiumPrice.toString();
@@ -74,6 +74,12 @@ class SubTelaParaAdicionarOuAtualizar extends StatelessWidget {
                         validacao: (text) => validador.nomeValido(text),
                         textoErro: 'nome invalido'),
                     campoDeTextoCadastro(
+                        campo: 'Login',
+                        somenteVisualizacao: user != null ? true : false,
+                        controller: loginController,
+                        validacao: (text) => text.isEmpty,
+                        textoErro: 'Login invalido'),
+                    campoDeTextoCadastro(
                         campo: 'Cpf',
                         controller: cpfController,
                         validacao: (text) => validador.cpfValido(text),
@@ -93,11 +99,6 @@ class SubTelaParaAdicionarOuAtualizar extends StatelessWidget {
                         controller: emailController,
                         validacao: (text) => validador.emailValido(text),
                         textoErro: 'email invalido'),
-                    campoDeTextoCadastro(
-                        campo: 'Senha',
-                        controller: senhaController,
-                        validacao: (text) => text.isEmpty,
-                        textoErro: 'Senha invalida'),
                     CampoData(
                       titulo: 'Data de Nascimento',
                       controllerData: dataDeNascimentoController,
@@ -136,8 +137,9 @@ class SubTelaParaAdicionarOuAtualizar extends StatelessWidget {
                 if (_formKey.currentState!.validate()) {
                   onPressedCriarAtualizar!(User(
                       name: nomeController.text,
+                      login: loginController.text,
                       cpf: cpfController.text,
-                      senha: senhaController.text,
+                      senha: loginController.text,
                       apartmentNumber: numeroDoApartamentoController.text,
                       birthDay: DateFormatBR.dateFormatDefault(
                           dataDeNascimentoController.text),

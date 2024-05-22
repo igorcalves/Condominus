@@ -1,9 +1,11 @@
+import 'package:Condominus/dominio/entidades/auth.dart';
 import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/repository/interfaces/interface_repositorio_moradores.dart';
 import 'package:flutter/material.dart';
 
 class UserProvider with ChangeNotifier {
   late List<User> users = [];
+  late User user;
 
   bool _carregamento = false;
   bool _deuError = false;
@@ -17,8 +19,25 @@ class UserProvider with ChangeNotifier {
     return [...users].isNotEmpty ? [...users] : null;
   }
 
-  carregarTodos() async {
-    await _repositorio.buscarTodos().then((value) {
+  User getUser() {
+    return user;
+  }
+
+  login(AuthDto authDto) async {
+    trocarEstadoCarregamento();
+    await _repositorio.login(authDto).then((value) {
+      _deuError = false;
+      trocarEstadoCarregamento();
+      user = User.fromJson(value);
+    }).catchError((error) {
+      _msgError = error.message;
+      _deuError = true;
+      trocarEstadoCarregamento();
+    });
+  }
+
+  carregarTodos(token) async {
+    await _repositorio.buscarTodos(token).then((value) {
       users = User.fromJsonList(value);
       _deuError = false;
       trocarEstadoCarregamento();
@@ -33,7 +52,8 @@ class UserProvider with ChangeNotifier {
     return users.length;
   }
 
-  escolherTipoDeBusca(String data) async {
+  escolherTipoDeBusca(String data, token) async {
+    trocarEstadoCarregamento();
     users = [];
 
     bool apenasNumeros = true;
@@ -45,56 +65,56 @@ class UserProvider with ChangeNotifier {
     }
     if (data.isNotEmpty) {
       if (apenasNumeros) {
-        await _buscarUsuariosPorCpf(data);
+        await _buscarUsuariosPorCpf(data, token);
       } else {
-        await _buscarUsuariosPorNome(data);
+        await _buscarUsuariosPorNome(data, token);
       }
     } else {
-      carregarTodos();
+      carregarTodos(token);
     }
   }
 
-  _buscarUsuariosPorCpf(String cpf) async {
-    await _repositorio.buscarMoradorPorCpf(cpf).then((value) {
+  _buscarUsuariosPorCpf(String cpf, token) async {
+    await _repositorio.buscarMoradorPorCpf(cpf, token).then((value) {
       users.add(User.fromJson(value));
       _deuError = false;
       trocarEstadoCarregamento();
     }).catchError((error) => _chamarErro(error));
   }
 
-  criarUsuario(User user) async {
-    await _repositorio.criarUsuario(user).then((value) async {
-      await carregarTodos();
+  criarUsuario(User user, token) async {
+    await _repositorio.criarUsuario(user, token).then((value) async {
+      await carregarTodos(token);
     }).catchError((error) => _chamarErro(error));
   }
 
-  atualizarUsuario(User user) async {
-    await _repositorio.atualizarUsuario(user).then((value) async {
-      await carregarTodos();
+  atualizarUsuario(User user, token) async {
+    await _repositorio.atualizarUsuario(user, token).then((value) async {
+      await carregarTodos(token);
     }).catchError((error) => _chamarErro(error));
   }
 
-  _buscarUsuariosPorNome(String nome) async {
-    await _repositorio.buscarMoradorPorNome(nome).then((value) {
+  _buscarUsuariosPorNome(String nome, token) async {
+    await _repositorio.buscarMoradorPorNome(nome, token).then((value) {
       users = User.fromJsonList(value);
       _deuError = false;
       trocarEstadoCarregamento();
     }).catchError((error) => _chamarErro(error));
   }
 
-  void deletarUsuario(String cpf) async {
+  void deletarUsuario(String cpf, token) async {
     trocarEstadoCarregamento();
 
-    await _repositorio.desativarUsuario(cpf).then((value) async {
-      await carregarTodos();
+    await _repositorio.desativarUsuario(cpf, token).then((value) async {
+      await carregarTodos(token);
     }).catchError((error) => _chamarErro(error));
   }
 
-  void ativarUsuario(String cpf) async {
+  void ativarUsuario(String cpf, token) async {
     trocarEstadoCarregamento();
 
-    await _repositorio.ativarUsuario(cpf).then((value) async {
-      await carregarTodos();
+    await _repositorio.ativarUsuario(cpf, token).then((value) async {
+      await carregarTodos(token);
     }).catchError((error) => _chamarErro(error));
   }
 

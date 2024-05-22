@@ -87,14 +87,15 @@ class FrameTileReservas extends StatelessWidget {
 }
 
 class TileDeVisitante extends StatelessWidget {
-  const TileDeVisitante({
-    super.key,
-    required this.visitante,
-    required this.visitantesProvider,
-  });
+  const TileDeVisitante(
+      {super.key,
+      required this.visitante,
+      required this.visitantesProvider,
+      required this.token});
 
   final Visitantes visitante;
   final VisitantesProvider visitantesProvider;
+  final token;
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +129,8 @@ class TileDeVisitante extends StatelessWidget {
                       botaoDeEnviar: 'Editar',
                       onPressedCriarAtualizar:
                           (Visitantes visitanteParaeditar) {
-                        visitantesProvider.editarVisitante(visitanteParaeditar);
+                        visitantesProvider.editarVisitante(
+                            visitanteParaeditar, token);
                       },
                       titulo: "Atualizar");
                 },
@@ -138,7 +140,7 @@ class TileDeVisitante extends StatelessWidget {
         },
         onPressedIconeDeletar: () {
           visitantesProvider.trocarEstadoCarregamento();
-          visitantesProvider.deletarVisitante(visitante.cpf!);
+          visitantesProvider.deletarVisitante(visitante.cpf!, token);
         },
       ),
     );

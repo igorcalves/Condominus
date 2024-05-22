@@ -2,6 +2,7 @@ import 'package:Condominus/componentes/frame_superior_busca.dart';
 import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/pages/morador/visitantes/corpo_tela_visitante.dart';
+import 'package:Condominus/provider/morador_provider.dart';
 import 'package:Condominus/provider/visitante_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,9 @@ class TelaDeVisitantesPorMorador extends StatelessWidget {
     VisitantesProvider visitantesProvider =
         Provider.of<VisitantesProvider>(context);
 
+    UserProvider usersProvider =
+        Provider.of<UserProvider>(context, listen: false);
+    var token = usersProvider.getUser().token;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -35,7 +39,7 @@ class TelaDeVisitantesPorMorador extends StatelessWidget {
             children: [
               CampoDeBusca(onPressedPesquisa: (String texto) {
                 visitantesProvider.trocarEstadoCarregamento();
-                visitantesProvider.escolherTipoDeBusca(user.cpf!);
+                visitantesProvider.escolherTipoDeBusca(user.cpf!, token);
               }),
               const SizedBox(
                 height: 20,

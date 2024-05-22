@@ -1,8 +1,9 @@
 abstract class InterfaceRepositorioVisiante {
-  Future<List<dynamic>> buscarVisitantePorNome(String nome);
-  Future<List<dynamic>> buscarVisitantePorCpfDoMorador(String cpfDoMorador);
-  Future editarVisitante(dynamic visitante);
+  Future<List<dynamic>> buscarVisitantePorNome(String nome, token);
+  Future<List<dynamic>> buscarVisitantePorCpfDoMorador(
+      String cpfDoMorador, token);
+  Future editarVisitante(dynamic visitante, token);
 
-  Future deletarVisitante(String cpf);
-  Future criarVisitante(dynamic visitante);
+  Future deletarVisitante(String cpf, token);
+  Future criarVisitante(dynamic visitante, token);
 }

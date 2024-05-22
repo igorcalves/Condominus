@@ -1,4 +1,3 @@
-import 'package:Condominus/componentes/frame_superior_busca.dart';
 import 'package:Condominus/dominio/entidades/reserva.dart';
 import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/pages/morador/reservas/carregamento_lista_reservas.dart';

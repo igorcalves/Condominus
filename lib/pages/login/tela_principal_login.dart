@@ -1,3 +1,5 @@
+import 'package:Condominus/dominio/entidades/auth.dart';
+import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/dominio/validadores.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
@@ -47,12 +49,10 @@ class TelaDeLogin extends StatelessWidget {
                         SizedBox(
                           width: 280,
                           child: campoDeTextoCadastro(
-                            teclado: TextInputType.number,
                             controller: loginControler,
                             campo: 'Login',
                             textoErro: 'Login Inválido',
-                            validacao: (String text) =>
-                                validador.cpfValido(text),
+                            validacao: (String text) => text.isEmpty,
                           ),
                         ),
                         SizedBox(
@@ -73,18 +73,19 @@ class TelaDeLogin extends StatelessWidget {
                             backgroundColor: Colors.transparent,
                           ),
                           onPressed: () async {
+                            loginControler.text = 'morador';
+                            senhaControler.text = '123';
+                            await usersProvider.login(AuthDto(
+                                login: loginControler.text,
+                                password: senhaControler.text));
+
                             if (_formKey.currentState!.validate()) {
-                              await usersProvider
-                                  .escolherTipoDeBusca(loginControler.text);
-                              var usuario = usersProvider.buscarTodos();
-                              usersProvider.zerarLista();
-                              if (context.mounted && usuario![0] != null) {
+                              if (context.mounted) {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => TelaPrincipalSindico(
-                                      user: usuario[0],
-                                    ),
+                                        user: usersProvider.getUser()),
                                   ),
                                 );
                               }

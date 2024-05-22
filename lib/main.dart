@@ -1,5 +1,5 @@
 import 'package:Condominus/pages/login/tela_principal_login.dart';
-import 'package:Condominus/pages/morador/noticias/tela_principal_noticias.dart';
+
 import 'package:Condominus/provider/morador_provider.dart';
 import 'package:Condominus/provider/reservar_provider.dart';
 import 'package:Condominus/provider/visitante_provider.dart';
