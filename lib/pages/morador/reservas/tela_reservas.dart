@@ -2,6 +2,7 @@ import 'package:Condominus/dominio/entidades/reserva.dart';
 import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/pages/morador/reservas/carregamento_lista_reservas.dart';
 import 'package:Condominus/pages/morador/reservas/sub_tela_criarReserva.dart';
+import 'package:Condominus/provider/morador_provider.dart';
 import 'package:Condominus/provider/reservar_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:Condominus/componentes/frame_tile.dart';
@@ -27,6 +28,10 @@ class TelaDeReservaDeMoradores extends StatelessWidget {
     List<String> chaves = areas.keys.toList();
     List<int> valores = areas.values.toList();
     ReservaProvider reservaProvider = Provider.of<ReservaProvider>(context);
+    UserProvider usersProvider = Provider.of<UserProvider>(context);
+
+    var token = usersProvider.getUser().token;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -78,6 +83,7 @@ class TelaDeReservaDeMoradores extends StatelessWidget {
                           texto: chaves[index],
                           onPressedAgendamento: () {
                             subTela(
+                                token: token!,
                                 context: context,
                                 reservaProvider: reservaProvider,
                                 local: chaves[index],
@@ -98,7 +104,7 @@ class TelaDeReservaDeMoradores extends StatelessWidget {
                   IconePequisa(
                     onPressed: () {
                       reservaProvider.trocarEstadoCarregamento();
-                      reservaProvider.carregarTodos(user.cpf!);
+                      reservaProvider.carregarTodos(user.cpf!, token);
                     },
                   ),
                   SizedBox(
@@ -116,13 +122,13 @@ class TelaDeReservaDeMoradores extends StatelessWidget {
     );
   }
 
-  Future<dynamic> subTela({
-    required context,
-    required ReservaProvider reservaProvider,
-    required String local,
-    required String id,
-    required String cpf,
-  }) {
+  Future<dynamic> subTela(
+      {required context,
+      required ReservaProvider reservaProvider,
+      required String local,
+      required String id,
+      required String cpf,
+      required String token}) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -135,7 +141,7 @@ class TelaDeReservaDeMoradores extends StatelessWidget {
                 botaoDeEnviar: 'Criar',
                 onPressedCriarAtualizar: (Reserva reserva) async {
                   reservaProvider.trocarEstadoCarregamento();
-                  await reservaProvider.criarReserva(reserva, cpf);
+                  await reservaProvider.criarReserva(reserva, cpf, token);
                 },
                 titulo: "Reservas");
           },

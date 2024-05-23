@@ -20,17 +20,17 @@ class ReservaProvider with ChangeNotifier {
     return reservas.length;
   }
 
-  carregarTodos(String cpf) async {
-    await repositotio.buscarTodasReservas(cpf).then((value) {
+  carregarTodos(String cpf, token) async {
+    await repositotio.buscarTodasReservas(cpf, token).then((value) {
       reservas = Reserva.fromJsonList(value);
       trocarEstadoCarregamento();
       _deuError = false;
     }).catchError((error) => _chamarErro(error));
   }
 
-  criarReserva(Reserva reserva, String cpf) async {
-    await repositotio.criarReserva(reserva).then((value) async {
-      carregarTodos(cpf);
+  criarReserva(Reserva reserva, String cpf, token) async {
+    await repositotio.criarReserva(reserva, token).then((value) async {
+      carregarTodos(cpf, token);
       _deuError = false;
     }).catchError((error) => _chamarErro(error));
   }

@@ -41,11 +41,6 @@ class SubTelaParaAdicionarReserva extends StatelessWidget {
   Widget build(BuildContext context) {
     localController.text = local;
 
-    ///
-    dataDoAgendamentoController.text = '2024-12-12';
-    incioDoAgendamentoController.text = '16:00';
-    finalDoAgendamentoController.text = '20:00';
-
     ReservaProvider reservaProvider = Provider.of<ReservaProvider>(
       context,
     );

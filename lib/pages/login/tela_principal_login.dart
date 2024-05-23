@@ -1,5 +1,4 @@
 import 'package:Condominus/dominio/entidades/auth.dart';
-import 'package:Condominus/dominio/entidades/user.dart';
 import 'package:Condominus/dominio/validadores.dart';
 import 'package:Condominus/modelosDoApp/modelo_cores.dart';
 import 'package:Condominus/modelosDoApp/modelo_texto.dart';
@@ -59,6 +58,7 @@ class TelaDeLogin extends StatelessWidget {
                           width: 280,
                           child: campoDeTextoCadastro(
                             controller: senhaControler,
+                            campoSenha: true,
                             campo: 'Senha',
                             textoErro: 'Senha Inválida',
                             validacao: (String text) => text.isEmpty,
@@ -73,21 +73,44 @@ class TelaDeLogin extends StatelessWidget {
                             backgroundColor: Colors.transparent,
                           ),
                           onPressed: () async {
-                            loginControler.text = 'morador';
-                            senhaControler.text = '123';
                             await usersProvider.login(AuthDto(
                                 login: loginControler.text,
                                 password: senhaControler.text));
 
                             if (_formKey.currentState!.validate()) {
-                              if (context.mounted) {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TelaPrincipalSindico(
-                                        user: usersProvider.getUser()),
-                                  ),
-                                );
+                              if (usersProvider.getUser().name == null &&
+                                  context.mounted) {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text('Login'),
+                                        content: const TextoPersonalizado(
+                                            'Login ou Senha inválido'),
+                                        backgroundColor:
+                                            Cores.corDoAlertDialog(),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const TextoPersonalizado(
+                                                'Fechar'),
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              } else {
+                                if (context.mounted) {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          TelaPrincipalSindico(
+                                              user: usersProvider.getUser()),
+                                    ),
+                                  );
+                                }
                               }
                             }
                           },

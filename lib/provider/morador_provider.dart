@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class UserProvider with ChangeNotifier {
   late List<User> users = [];
-  late User user;
+  User user = User();
 
   bool _carregamento = false;
   bool _deuError = false;
@@ -20,7 +20,7 @@ class UserProvider with ChangeNotifier {
   }
 
   User getUser() {
-    return user;
+    return user != null ? user : User();
   }
 
   login(AuthDto authDto) async {

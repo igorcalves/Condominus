@@ -8,11 +8,14 @@ class RepositorioDeReservas extends InterfaceRepositorioReserva {
   final String _uri;
 
   @override
-  Future<List> buscarTodasReservas(String cpf) async {
+  Future<List> buscarTodasReservas(String cpf, token) async {
     http.Response response;
     try {
       var url = Uri.parse('$_uri/reservations/cpf?cpf=$cpf');
-      response = await http.get(url).timeout(const Duration(seconds: 2));
+      response = await http.get(url, headers: {
+        "Content-Type": "application/json",
+        "Authorization": 'Bearer $token'
+      });
     } catch (e) {
       throw Exception('Servidor Offiline');
     }
@@ -26,14 +29,16 @@ class RepositorioDeReservas extends InterfaceRepositorioReserva {
   }
 
   @override
-  Future criarReserva(reserva) async {
+  Future criarReserva(reserva, token) async {
     http.Response response;
     try {
       var url = Uri.parse('$_uri/reservations');
-      response =
-          await http.post(url, body: jsonEncode(reserva.toJson()), headers: {
-        "Content-Type": "application/json",
-      });
+      response = await http.post(url,
+          body: jsonEncode(reserva.toJson()),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": 'Bearer $token'
+          });
     } catch (e) {
       throw Exception('Servidor Offline');
     }

@@ -18,11 +18,13 @@ TextFormField campoDeTextoCadastro({
   required String campo,
   required String textoErro,
   bool somenteVisualizacao = false,
+  bool campoSenha = false,
   var teclado = TextInputType.name,
 }) {
   return TextFormField(
     keyboardType: teclado,
     readOnly: somenteVisualizacao,
+    obscureText: campoSenha,
     style: estiloDoTexto(tamanho: tamanhoFonte),
     cursorColor: Colors.white,
     controller: controller,

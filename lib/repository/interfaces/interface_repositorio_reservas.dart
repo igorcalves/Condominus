@@ -1,4 +1,4 @@
 abstract class InterfaceRepositorioReserva {
-  Future<List<dynamic>> buscarTodasReservas(String cpf);
-  Future criarReserva(dynamic reserva);
+  Future<List<dynamic>> buscarTodasReservas(String cpf, token);
+  Future criarReserva(dynamic reserva, token);
 }

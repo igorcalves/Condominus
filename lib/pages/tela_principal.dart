@@ -31,7 +31,6 @@ class TelaPrincipalSindico extends StatelessWidget {
     } else if (user.role == 'ADM') {
       morador = false;
     }
-    print(user.role);
 
     return Scaffold(
       appBar: AppBar(
