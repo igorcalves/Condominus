@@ -112,10 +112,12 @@ class SubTelaParaAdicionarReserva extends StatelessWidget {
                       cpf: cpf,
                       areaId: id,
                       startOfScheduling: DateFormatBR.dataParaEnviar(
-                          dataDoAgendamentoController.text,
+                          DateFormatBR.dateFormatDefault(
+                              dataDoAgendamentoController.text),
                           incioDoAgendamentoController.text),
                       endOfScheduling: DateFormatBR.dataParaEnviar(
-                          dataDoAgendamentoController.text,
+                          DateFormatBR.dateFormatDefault(
+                              dataDoAgendamentoController.text),
                           finalDoAgendamentoController.text)));
                   if (reservaProvider.deuErro) {
                     if (context.mounted) {

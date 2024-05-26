@@ -30,19 +30,18 @@ class RepositorioDeReservas extends InterfaceRepositorioReserva {
 
   @override
   Future criarReserva(reserva, token) async {
+    var json = jsonEncode(reserva.toJson());
     http.Response response;
     try {
       var url = Uri.parse('$_uri/reservations');
-      response = await http.post(url,
-          body: jsonEncode(reserva.toJson()),
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": 'Bearer $token'
-          });
+      response = await http.post(url, body: json, headers: {
+        "Content-Type": "application/json",
+        "Authorization": 'Bearer $token'
+      });
     } catch (e) {
       throw Exception('Servidor Offline');
     }
-
+    print(json);
     if (response.statusCode == 200) {
       if (response.headers['content-type']?.contains('application/json') ??
           false) {
