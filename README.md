@@ -21,7 +21,7 @@
   <a href="#tecnologias">Tecnologias</a> •
   <a href="#instalação">Instalação</a> •
   <a href="#documentação">Documentação</a> •
-  <a href="#colaboradores">Colaboradores</a> •
+  <a href="#colaboradores">Colaboradores</a> 
  
 </p>
 
