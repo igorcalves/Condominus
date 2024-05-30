@@ -84,4 +84,3 @@ Questões como funcinalidades ou especificidades do aplicativo podem ser encontr
 - Julio Cesar Ferreira Da Silva
 - Geovanna Gabriela Pessoa
 - Vitória Maria da Silva Lucas
-- Julio Cesar Ferreira Da Silva
