@@ -19,7 +19,9 @@
 <p align="center">
   <a href="#características">Características</a> •
   <a href="#tecnologias">Tecnologias</a> •
-  <a href="#características">Características</a> •
+  <a href="#instalação">Instalação</a> •
+  <a href="#documentação">Documentação</a> •
+  <a href="#colaboradores">Colaboradores</a> •
  
 </p>
 
@@ -73,11 +75,11 @@ $ code .
 # Com o projeto devidamente configurado abra seu android studio e inicie uma instancia de um aparelho Android após isso volte para o vs code e rode o projeto na pasta main, após alguns minutos o aplicativo iniciará dentro da instancia do Android. caso o servidor esteja rodando será possível realizar o login.
 ```
 
-## Documentação
+# Documentação
 Questões como funcinalidades ou especificidades do aplicativo podem ser encontradas neste [documento](https://github.com/igorcalves/Condominus/blob/main/Documenta%C3%A7%C3%A3o%20Final.pdf).
 
 
-## Colaboradores
+# Colaboradores
 - Igor Alves da Silva Pereira
 - Amanda Yumi Shimizu Costa
 - Bruna Amaral
