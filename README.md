@@ -1,11 +1,7 @@
 
-<h1 align="center">
 
-  Condominus
-  <br>
-</h1>
 
-<h4 align="center">Aplicativo movel para gestão de condominio
+<h4 align="center">
 
 <p align="center">
     <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white">
@@ -26,6 +22,7 @@
 </p>
 
 <img src="./assets/imagens/logoBranco.png">
+<p>Aplicativo movel para gestão de condominio</p>
 
 
 
