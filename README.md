@@ -65,7 +65,7 @@ dentro do Visual Studio instale a extenção do Flutter
 
 ```bash
 # # No terminal de comando dentro de uma pasta de sua escolha insira os seguintes comandos
-$ git clone https://github.com/igorcalves/Condominus
+$ git clone https://github.com/igorcalves/Condominus.git
 $ cd Condominus
 $ code .
 # Passos:
