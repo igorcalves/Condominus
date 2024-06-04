@@ -58,7 +58,7 @@ Para instalar o projeto, você irá precisar das seguintes ferranentas:
 - [Java-20](https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html)
 - [Dart](https://dart.dev/get-dart)
 - [Visual Studio](https://code.visualstudio.com/download)
-dentro do Visual Studio instale a extenção do Flutter
+dentro do Visual Studio instale a extensão do Flutter
 - [Andro Studio](https://developer.android.com/studio?gad_source=1&gclid=CjwKCAjwx-CyBhAqEiwAeOcTdaAf_7aEFzUXvEcHjxC7DFiYaU5uBmK1r4JbnfmEevc__qRP92dxcxoCbZMQAvD_BwE&gclsrc=aw.ds)
 
 
@@ -73,7 +73,7 @@ $ code .
 ```
 
 # Documentação
-Questões como funcinalidades ou especificidades do aplicativo podem ser encontradas neste [documento](https://github.com/igorcalves/Condominus/blob/main/Documenta%C3%A7%C3%A3o%20Final.pdf).
+Questões como funcionalidades ou especificidades do aplicativo podem ser encontradas neste [documento](https://github.com/igorcalves/Condominus/blob/main/Documenta%C3%A7%C3%A3o%20Final.pdf).
 
 
 # Colaboradores
